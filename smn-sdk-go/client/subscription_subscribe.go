@@ -17,44 +17,47 @@ import (
 	"fmt"
 )
 
-type DeleteTopicRequest struct {
+type SubscribeRequest struct {
 	*BaseRequest
-	TopicUrn string
+	TopicUrn string `json:"-"`
+	Endpoint string `json:"endpoint"`
+	Protocol string `json:"protocol"`
+	Remark   string `json:"remark"`
 }
 
-type DeleteTopicResponse struct {
+type SubscribeResponse struct {
 	*BaseResponse
+	SubscriptionUrn string `json:"subscription_urn"`
 }
 
-func (client *SmnClient) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopicResponse, err error) {
-	response = &DeleteTopicResponse{
+func (client *SmnClient) Subscribe(request *SubscribeRequest) (response *SubscribeResponse, err error) {
+	response = &SubscribeResponse{
 		BaseResponse: &BaseResponse{},
 	}
 	err = client.sendRequest(request, response)
 	return
 }
 
-func (client *SmnClient) NewDeleteTopicRequest() (request *DeleteTopicRequest) {
-	request = &DeleteTopicRequest{
+func (client *SmnClient) NewSubscribeRequest() (request *SubscribeRequest) {
+	request = &SubscribeRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
 	}
 	return
 }
 
-func (request *DeleteTopicRequest) GetUrl() (string, error) {
+func (request *SubscribeRequest) GetUrl() (urlStr string, err error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
 	}
-
 	return request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +
-		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.Topics +
-		util.UrlDelimiter + request.TopicUrn, nil
+		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.Topics + util.UrlDelimiter +
+		request.TopicUrn + util.UrlDelimiter + util.Subscriptions, nil
 }
 
-func (request *DeleteTopicRequest) GetMethod() string {
-	return util.DELETE
+func (request *SubscribeRequest) GetMethod() string {
+	return util.POST
 }
 
-func (request *DeleteTopicRequest) GetBodyReader() (reader io.Reader, err error) {
-	return nil, nil
+func (request *SubscribeRequest) GetBodyReader() (reader io.Reader, err error) {
+	return util.GetBodyParams(request)
 }
