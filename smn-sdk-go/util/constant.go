@@ -26,6 +26,8 @@ const (
 	CallBack       = "callback"
 	Topics         = "topics"
 	Attributes     = "attributes"
+	Publish        = "publish"
+	Default        = "default"
 
 	SmsFailEvent    = "sms_fail_event"
 	SmsReplyEvent   = "sms_reply_event"
