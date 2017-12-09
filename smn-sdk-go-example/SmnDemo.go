@@ -456,3 +456,4 @@ func PublishMessageTemplate() {
 
 	fmt.Printf("%#v\n", response)
 }
+
