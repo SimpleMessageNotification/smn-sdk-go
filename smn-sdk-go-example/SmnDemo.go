@@ -55,6 +55,37 @@ func main() {
 	PublishMessageStructure()
 	// publish message template
 	PublishMessageTemplate()
+	// list sms signs
+	ListSmsSigns()
+	// delete sms sign
+	DeleteSmsSign()
+	// list sms msg report
+	ListSmsMsgReport()
+	// get sms message content
+	GetSmsMessage()
+	// list sms callback event
+	ListSmsEvent()
+	// update sms callback event
+	UpdateSmsEvent()
+
+	// create topic
+	CreateTopic()
+	// update topic
+	UpdateTopic()
+	// delete topic
+	DeleteTopic()
+	// list topics
+	ListTopic()
+	// query topic detail
+	QueryTopicDetail()
+	// update topic attribute
+	UpdateTopicAttribute()
+	// list topic attributes
+	ListTopicAttributes()
+	// delete topic attribute by name
+	DeleteTopicAttributeByName()
+	// delete all topic attributes
+	DeleteTopicAttributes()
 }
 
 // send sms
