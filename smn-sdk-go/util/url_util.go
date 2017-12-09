@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/url"
 	"io"
-	"fmt"
 	"strings"
 )
 
@@ -33,7 +32,5 @@ func GetBodyParams(request interface{}) (reader io.Reader, err error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(string(jsonStr))
-
 	return strings.NewReader(string(jsonStr)), nil
 }
