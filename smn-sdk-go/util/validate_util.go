@@ -6,8 +6,10 @@ import (
 
 const (
 	MaxTopicDisplayName = 192
+	MaxTemplateContent  = 256 * 1024
 	PhoneMatchPattern   = "^\\+?[0-9]{1,31}"
 	TopicNamePattern    = "^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$"
+	TemplateNamePattern = "^[a-zA-Z0-9]{1}([-_a-zA-Z0-9]){0,64}"
 )
 
 func ValidatePhone(phone string) bool {
@@ -34,4 +36,17 @@ func ValidateTopicDiplayName(displayName string) bool {
 	}
 	bytes := []byte(displayName)
 	return len(bytes) < MaxTopicDisplayName
+}
+
+func ValidateMessageTemplateName(templateName string) bool {
+	reg := regexp.MustCompile(TemplateNamePattern)
+	return reg.MatchString(templateName)
+}
+
+func ValidateMessageTemplateContent(content string) bool {
+	if content == "" {
+		return false
+	}
+	bytes := []byte(content)
+	return len(bytes) < MaxTemplateContent
 }

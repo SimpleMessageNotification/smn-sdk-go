@@ -48,6 +48,17 @@ func main() {
 	DeleteTopicAttributeByName()
 	// delete all topic attributes
 	DeleteTopicAttributes()
+
+	// create message template
+	CreateMessageTemplate()
+	// query message template detail
+	QueryMessageTemplateDetail()
+	// list message template
+	ListMessageTemplate()
+	// update message template
+	UpdateMessageTemplate()
+	// delete message template
+	DeleteMessageTemplate()
 }
 
 // send sms
@@ -347,6 +358,96 @@ func DeleteTopicAttributes() {
 	request := smnClient.NewDeleteTopicAttributesRequest()
 	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:zhangyxTestCreate01"
 	response, err := smnClient.DeleteTopicAttributes(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func CreateMessageTemplate() {
+	request := smnClient.NewCreateMessageTemplateRequest()
+	request.Protocol = "sms"
+	request.MessageTemplateName = "template_test_by_zhangyx_for_go"
+	request.Content = "this is the first template for go {time}"
+	response, err := smnClient.CreateMessageTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func QueryMessageTemplateDetail() {
+	request := smnClient.NewQueryMessageTemplateDetailRequest()
+	request.MessageTemplateId = "d4c4968551534a298233c92b6c4916c7"
+	response, err := smnClient.QueryMessageTemplateDetail(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func ListMessageTemplate() {
+	request := smnClient.NewListMessageTemplateRequest()
+	request.Offset = "0"
+	request.Limit = "10"
+	request.MessageTemplateName = "template_test_by_zhangyx_for_go"
+	response, err := smnClient.ListMessageTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func UpdateMessageTemplate() {
+	request := smnClient.NewUpdateMessageTemplateRequest()
+	request.MessageTemplateId = "d4c4968551534a298233c92b6c4916c7"
+	request.Content = "this is the first template for go {time} v2"
+	response, err := smnClient.UpdateMessageTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func DeleteMessageTemplate() {
+	request := smnClient.NewDeleteMessageTemplateRequest()
+	request.MessageTemplateId = "d4c4968551534a298233c92b6c4916c7"
+	response, err := smnClient.DeleteMessageTemplate(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)
 		return
