@@ -27,6 +27,8 @@ const (
 	Topics         = "topics"
 	Attributes     = "attributes"
 	Subscriptions  = "subscriptions"
+	Publish        = "publish"
+	Default        = "default"
 
 	SmsFailEvent    = "sms_fail_event"
 	SmsReplyEvent   = "sms_reply_event"
