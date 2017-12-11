@@ -12,21 +12,24 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of get sms message
 type GetSmsMessageRequest struct {
 	*BaseRequest
 	MessageId string
 }
 
+// the response data of get sms message
 type GetSmsMessageResponse struct {
 	*BaseResponse
 	Message string `json:"message"`
 }
 
+// send request to get sms message
 func (client *SmnClient) GetSmsMessage(request *GetSmsMessageRequest) (response *GetSmsMessageResponse, err error) {
 	response = &GetSmsMessageResponse{
 		BaseResponse: &BaseResponse{},
@@ -35,6 +38,7 @@ func (client *SmnClient) GetSmsMessage(request *GetSmsMessageRequest) (response 
 	return
 }
 
+// create a new get sms message request struct
 func (client *SmnClient) NewGetSmsMessageRequest() (request *GetSmsMessageRequest) {
 	request = &GetSmsMessageRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -42,6 +46,7 @@ func (client *SmnClient) NewGetSmsMessageRequest() (request *GetSmsMessageReques
 	return
 }
 
+// get the url of the get sms message request
 func (request *GetSmsMessageRequest) GetUrl() (urlStr string, err error) {
 	if request.MessageId == "" {
 		return "", fmt.Errorf("messageId is null")
@@ -52,10 +57,12 @@ func (request *GetSmsMessageRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the get sms message request
 func (request *GetSmsMessageRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body params
 func (request *GetSmsMessageRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

@@ -15,10 +15,10 @@ import (
 	"time"
 )
 
-const TIMEFARMAT = "2006-01-02T15:04:05.000000Z"
+const TimeFormat = "2006-01-02T15:04:05.000000Z"
 
 func StringToTimestamp(dateString string) (int64, error) {
-	theTime, err := time.ParseInLocation(TIMEFARMAT, dateString, time.UTC)
+	theTime, err := time.ParseInLocation(TimeFormat, dateString, time.UTC)
 	if err != nil {
 		return 0, err
 	}

@@ -13,19 +13,22 @@ package client
 
 import (
 	"fmt"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of delete topic attributes
 type DeleteTopicAttributesRequest struct {
 	*BaseRequest
 	TopicUrn string
 }
 
+// the response data of delete topic attributes
 type DeleteTopicAttributeResponse struct {
 	*BaseResponse
 }
 
+// send request to delete topic attributes
 func (client *SmnClient) DeleteTopicAttributes(request *DeleteTopicAttributesRequest) (response *DeleteTopicAttributeResponse, err error) {
 	response = &DeleteTopicAttributeResponse{
 		BaseResponse: &BaseResponse{},
@@ -34,6 +37,7 @@ func (client *SmnClient) DeleteTopicAttributes(request *DeleteTopicAttributesReq
 	return
 }
 
+// create a new delete topic attributes request struct
 func (client *SmnClient) NewDeleteTopicAttributesRequest() (request *DeleteTopicAttributesRequest) {
 	request = &DeleteTopicAttributesRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -41,6 +45,7 @@ func (client *SmnClient) NewDeleteTopicAttributesRequest() (request *DeleteTopic
 	return
 }
 
+// get the url of the delete topic attributes request
 func (request *DeleteTopicAttributesRequest) GetUrl() (urlStr string, err error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -53,10 +58,12 @@ func (request *DeleteTopicAttributesRequest) GetUrl() (urlStr string, err error)
 	return
 }
 
+// get the http method of the delete topic attributes request
 func (request *DeleteTopicAttributesRequest) GetMethod() string {
 	return util.DELETE
 }
 
+// no body param
 func (request *DeleteTopicAttributesRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

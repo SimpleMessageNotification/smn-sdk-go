@@ -1,16 +1,29 @@
+/*
+ * Copyright (C) 2017. Huawei Technologies Co., LTD. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of Apache License, Version 2.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * Apache License, Version 2.0 for more details.
+ */
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"fmt"
 	"io"
 )
 
+//the request data of query message template detail
 type QueryMessageTemplateDetailRequest struct {
 	*BaseRequest
 	MessageTemplateId string
 }
 
+//the response data of query message template detail
 type QueryMessageTemplateDetailResponse struct {
 	*BaseResponse
 	MessageTemplateName string   `json:"message_template_name"`
@@ -21,6 +34,7 @@ type QueryMessageTemplateDetailResponse struct {
 	Content             string   `json:"content"`
 }
 
+// send request to query message template detail
 func (client *SmnClient) QueryMessageTemplateDetail(request *QueryMessageTemplateDetailRequest) (response *QueryMessageTemplateDetailResponse, err error) {
 	response = &QueryMessageTemplateDetailResponse{
 		BaseResponse: &BaseResponse{},
@@ -29,6 +43,7 @@ func (client *SmnClient) QueryMessageTemplateDetail(request *QueryMessageTemplat
 	return
 }
 
+// create a new query message template detail request struct
 func (client *SmnClient) NewQueryMessageTemplateDetailRequest() (request *QueryMessageTemplateDetailRequest) {
 	request = &QueryMessageTemplateDetailRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -36,6 +51,7 @@ func (client *SmnClient) NewQueryMessageTemplateDetailRequest() (request *QueryM
 	return
 }
 
+// get the url of the query message template detail request
 func (request *QueryMessageTemplateDetailRequest) GetUrl() (string, error) {
 
 	if request.MessageTemplateId == "" {
@@ -47,10 +63,12 @@ func (request *QueryMessageTemplateDetailRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.MessageTemplateId, nil
 }
 
+// get the http method of the query message template detail request
 func (request *QueryMessageTemplateDetailRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body params
 func (request *QueryMessageTemplateDetailRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

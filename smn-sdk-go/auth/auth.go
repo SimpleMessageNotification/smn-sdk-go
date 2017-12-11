@@ -12,8 +12,8 @@
 package auth
 
 import (
-	"smn-sdk-go/commom"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/commom"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"net/http"
 	"strings"
 	"io/ioutil"
@@ -31,8 +31,8 @@ const (
 	id                    = "id"
 	expiresAt             = "expires_at"
 )
-/**
- */
+
+// used for user authentication
 type Auth struct {
 	smnConfiguration *commom.SmnConfiguration
 	httpClient       *http.Client
@@ -41,6 +41,7 @@ type Auth struct {
 	expiresTime      int64
 }
 
+//create a new auth struct
 func NewAuth(smnConfiguration *commom.SmnConfiguration, client *http.Client) *Auth {
 	auth := new(Auth)
 	auth.smnConfiguration = smnConfiguration
@@ -48,6 +49,8 @@ func NewAuth(smnConfiguration *commom.SmnConfiguration, client *http.Client) *Au
 	return auth
 }
 
+// get token and projectId
+// if cached, return
 func (auth *Auth) GetTokenAndProject() (token, projectId string, err error) {
 	if auth.authToken == "" || auth.isExpired() {
 		mu.Lock()

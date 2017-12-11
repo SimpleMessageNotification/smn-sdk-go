@@ -13,21 +13,25 @@ package client
 
 import (
 	"fmt"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+//the request data of publish message
 type PublishMessageRequest struct {
 	*BaseRequest
 	TopicUrn            string            `json:"-"`
 	Subject             string            `json:"subject"`
 	Message             string            `json:"message"`
 }
+
+//the response data of publish message
 type PublishMessageResponse struct {
 	*BaseResponse
 	MessageId string `json:"message_id"`
 }
 
+// send request to publish message
 func (client *SmnClient) PublishMessage(request *PublishMessageRequest) (response *PublishMessageResponse, err error) {
 	response = &PublishMessageResponse{
 		BaseResponse: &BaseResponse{},
@@ -36,6 +40,7 @@ func (client *SmnClient) PublishMessage(request *PublishMessageRequest) (respons
 	return
 }
 
+// create a new publish message request struct
 func (client *SmnClient) NewPublishMessageRequest() (request *PublishMessageRequest) {
 	request = &PublishMessageRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -43,6 +48,7 @@ func (client *SmnClient) NewPublishMessageRequest() (request *PublishMessageRequ
 	return
 }
 
+// get the url of the publish message request
 func (request *PublishMessageRequest) GetUrl() (string, error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -61,10 +67,12 @@ func (request *PublishMessageRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.TopicUrn + util.UrlDelimiter + util.Publish, nil
 }
 
+// get the http method of the publish message request
 func (request *PublishMessageRequest) GetMethod() string {
 	return util.POST
 }
 
+// get the body params of the update message template request
 func (request *PublishMessageRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

@@ -13,9 +13,10 @@ package client
 
 import (
 	"io"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 )
 
+// the base request info
 type BaseRequest struct {
 	projectId  string `json:"-"`
 	url        string `json:"-"`
@@ -25,6 +26,7 @@ type BaseRequest struct {
 	Headers map[string]string `json:"-"`
 }
 
+// the interface for request
 type SmnRequest interface {
 	GetUrl() (string, error)
 	GetMethod() string
@@ -35,22 +37,27 @@ type SmnRequest interface {
 	addHeaderParam(key, value string)
 }
 
+// get the request headers
 func (request *BaseRequest) GetHeaders() map[string]string {
 	return request.Headers
 }
 
+// add the header to request
 func (request *BaseRequest) addHeaderParam(key, value string) {
 	request.Headers[key] = value
 }
 
+// set project
 func (request *BaseRequest) SetProjectId(projectId string) {
 	request.projectId = projectId
 }
 
+// set region name
 func (request *BaseRequest) SetRegionName(regionName string) {
 	request.regionName = regionName
 }
 
+// get smn service url
 func (request *BaseRequest) GetSmnServiceUrl() string {
 	return util.HttpsPrefix + util.Smn + "." + request.regionName + "." + util.Endpoint +
 		util.UrlDelimiter

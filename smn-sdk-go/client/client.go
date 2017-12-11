@@ -13,24 +13,27 @@ package client
 
 import (
 	"net/http"
-	"smn-sdk-go/commom"
-	"smn-sdk-go/auth"
+	"github.com/smn-sdk-go/smn-sdk-go/commom"
+	"github.com/smn-sdk-go/smn-sdk-go/auth"
 	"fmt"
 	"encoding/json"
 )
 
-var version = "0.0.1"
+var version = "1.0.0"
 
+// the smn client to use smn
 type SmnClient struct {
 	httpClient       *http.Client
 	smnConfiguration *commom.SmnConfiguration
 	auth             *auth.Auth
 }
 
+// create a new smn client without config
 func NewClient(userName, domainName, password, regionName string) (client SmnClient, err error) {
 	return NewClientWithConfig(userName, domainName, password, regionName, nil)
 }
 
+// create a new smn client with client config
 func NewClientWithConfig(userName, domainName, password, regionName string, config *commom.ClientConfiguration) (client SmnClient, err error) {
 	smnConfiguration := &commom.SmnConfiguration{Username: userName, DomainName: domainName, Password: password, RegionName: regionName}
 	client.smnConfiguration = smnConfiguration

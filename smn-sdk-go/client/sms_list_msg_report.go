@@ -12,10 +12,11 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of list sms msg report
 type ListSmsMsgReportRequest struct {
 	*BaseRequest
 	StartTime string `json:"start_time"`
@@ -27,6 +28,7 @@ type ListSmsMsgReportRequest struct {
 	Offset    string `json:"offset"`
 }
 
+// the response data of list sms msg report
 type ListSmsMsgReportResponse struct {
 	*BaseResponse
 	Count int                `json:"count"`
@@ -46,6 +48,7 @@ type SmsMsgReportInfo struct {
 	DeliverTime string `json:"deliver_time"`
 }
 
+// send request to list sms msg report
 func (client *SmnClient) ListSmsMsgReport(request *ListSmsMsgReportRequest) (response *ListSmsMsgReportResponse, err error) {
 	response = &ListSmsMsgReportResponse{
 		BaseResponse: &BaseResponse{},
@@ -54,6 +57,7 @@ func (client *SmnClient) ListSmsMsgReport(request *ListSmsMsgReportRequest) (res
 	return
 }
 
+// create a new list sms msg report request struct
 func (client *SmnClient) NewListSmsMsgReportRequest() (request *ListSmsMsgReportRequest) {
 	request = &ListSmsMsgReportRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -63,6 +67,7 @@ func (client *SmnClient) NewListSmsMsgReportRequest() (request *ListSmsMsgReport
 	return
 }
 
+// get the url of the list sms msg report request
 func (request *ListSmsMsgReportRequest) GetUrl() (urlStr string, err error) {
 	urlStr = request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.SmnProtocolSms +
@@ -76,10 +81,12 @@ func (request *ListSmsMsgReportRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the list sms msg report request
 func (request *ListSmsMsgReportRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body params
 func (request *ListSmsMsgReportRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

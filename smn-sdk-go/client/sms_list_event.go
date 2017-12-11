@@ -12,27 +12,31 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of list sms event
 type ListSmsEventRequest struct {
 	*BaseRequest
 	EventType string `json:"event_type"`
 }
 
+// the response data of list sms event
 type ListSmsEventResponse struct {
 	*BaseResponse
 	TopicUrn string         `json:"topic_urn"`
 	Callback []CallbackInfo `json:"callback"`
 }
 
+// the  data of sms event callback info
 type CallbackInfo struct {
 	EventType string `json:"event_type"`
 	TopicUrn  string `json:"topic_urn"`
 }
 
+// send request to list sms event
 func (client *SmnClient) ListSmsEvent(request *ListSmsEventRequest) (response *ListSmsEventResponse, err error) {
 	response = &ListSmsEventResponse{
 		BaseResponse: &BaseResponse{},
@@ -41,6 +45,7 @@ func (client *SmnClient) ListSmsEvent(request *ListSmsEventRequest) (response *L
 	return
 }
 
+// create a new list sms event request struct
 func (client *SmnClient) NewListSmsEventRequest() (request *ListSmsEventRequest) {
 	request = &ListSmsEventRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -48,6 +53,7 @@ func (client *SmnClient) NewListSmsEventRequest() (request *ListSmsEventRequest)
 	return
 }
 
+// get the url of the list sms event request
 func (request *ListSmsEventRequest) GetUrl() (urlStr string, err error) {
 	if request.EventType != "" && !util.ValidateSmsEventType(request.EventType) {
 		return "", fmt.Errorf("eventType is invalid")
@@ -65,10 +71,12 @@ func (request *ListSmsEventRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the list sms event request
 func (request *ListSmsEventRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body params
 func (request *ListSmsEventRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

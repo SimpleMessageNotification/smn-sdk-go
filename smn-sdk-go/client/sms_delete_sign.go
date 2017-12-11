@@ -12,20 +12,23 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of delete sms sign
 type DeleteSmsSignRequest struct {
 	*BaseRequest
 	SignId string `json:"sign_id"`
 }
 
+// the response data of delete sms sign
 type DeleteSmsSignResponse struct {
 	*BaseResponse
 }
 
+// send request to delete sms sign
 func (client *SmnClient) DeleteSmsSign(request *DeleteSmsSignRequest) (response *DeleteSmsSignResponse, err error) {
 	response = &DeleteSmsSignResponse{
 		BaseResponse: &BaseResponse{},
@@ -34,6 +37,7 @@ func (client *SmnClient) DeleteSmsSign(request *DeleteSmsSignRequest) (response 
 	return
 }
 
+// create a new delete sms sign request struct
 func (client *SmnClient) NewDeleteSmsSignRequest() (request *DeleteSmsSignRequest) {
 	request = &DeleteSmsSignRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -41,6 +45,7 @@ func (client *SmnClient) NewDeleteSmsSignRequest() (request *DeleteSmsSignReques
 	return
 }
 
+// get the url of the delete sms sign request
 func (request *DeleteSmsSignRequest) GetUrl() (string, error) {
 	if request.SignId == "" {
 		return "", fmt.Errorf("signId is null")
@@ -50,10 +55,12 @@ func (request *DeleteSmsSignRequest) GetUrl() (string, error) {
 		request.SignId, nil
 }
 
+// get the http method of the delete sms sign request
 func (request *DeleteSmsSignRequest) GetMethod() string {
 	return util.DELETE
 }
 
+// no body params
 func (request *DeleteSmsSignRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

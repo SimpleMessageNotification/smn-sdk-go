@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// get the request query params
 func GetQueryParams(request interface{}) (urlEncoded string, err error) {
 	jsonStr, err := json.Marshal(request)
 	if err != nil {
@@ -27,6 +28,7 @@ func GetQueryParams(request interface{}) (urlEncoded string, err error) {
 	return
 }
 
+// get the request body params
 func GetBodyParams(request interface{}) (reader io.Reader, err error) {
 	jsonStr, err := json.Marshal(request)
 	if err != nil {

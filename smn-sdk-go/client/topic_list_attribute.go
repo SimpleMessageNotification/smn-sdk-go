@@ -13,21 +13,24 @@ package client
 
 import (
 	"fmt"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of list topic attribute
 type ListTopicAttributesRequest struct {
 	*BaseRequest
 	TopicUrn string `json:"-"`
 	Name     string `json:"name"`
 }
 
+// the response data of list topic attribute
 type ListTopicAttributesResponse struct {
 	*BaseResponse
 	Attributes map[string]interface{} `json:"attributes"`
 }
 
+// send request to list topic attribute
 func (client *SmnClient) ListTopicAttributes(request *ListTopicAttributesRequest) (response *ListTopicAttributesResponse, err error) {
 	response = &ListTopicAttributesResponse{
 		BaseResponse: &BaseResponse{},
@@ -36,6 +39,7 @@ func (client *SmnClient) ListTopicAttributes(request *ListTopicAttributesRequest
 	return
 }
 
+// create a new list topic attribute request struct
 func (client *SmnClient) NewListTopicAttributesRequest() (request *ListTopicAttributesRequest) {
 	request = &ListTopicAttributesRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -43,6 +47,7 @@ func (client *SmnClient) NewListTopicAttributesRequest() (request *ListTopicAttr
 	return
 }
 
+// get the url of the list topic attribute request
 func (request *ListTopicAttributesRequest) GetUrl() (urlStr string, err error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -62,10 +67,12 @@ func (request *ListTopicAttributesRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the list topic attribute request
 func (request *ListTopicAttributesRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body param
 func (request *ListTopicAttributesRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

@@ -12,20 +12,23 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of update sms event
 type UpdateSmsEventRequest struct {
 	*BaseRequest
 	Callback []CallbackInfo `json:"callback"`
 }
 
+// the response data of update sms event
 type UpdateSmsEventResponse struct {
 	*BaseResponse
 }
 
+// send request to update sms event
 func (client *SmnClient) UpdateSmsEvent(request *UpdateSmsEventRequest) (response *UpdateSmsEventResponse, err error) {
 	response = &UpdateSmsEventResponse{
 		BaseResponse: &BaseResponse{},
@@ -34,6 +37,7 @@ func (client *SmnClient) UpdateSmsEvent(request *UpdateSmsEventRequest) (respons
 	return
 }
 
+// create a new update sms event request struct
 func (client *SmnClient) NewUpdateSmsEventRequest() (request *UpdateSmsEventRequest) {
 	request = &UpdateSmsEventRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -41,6 +45,7 @@ func (client *SmnClient) NewUpdateSmsEventRequest() (request *UpdateSmsEventRequ
 	return
 }
 
+// get the url of the update sms event request
 func (request *UpdateSmsEventRequest) GetUrl() (urlStr string, err error) {
 	if request.Callback == nil || len(request.Callback) == 0 {
 		return "", fmt.Errorf("callbacks is invalid")
@@ -52,10 +57,12 @@ func (request *UpdateSmsEventRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the update sms event request
 func (request *UpdateSmsEventRequest) GetMethod() string {
 	return util.PUT
 }
 
+// get the body params of the update sms event request
 func (request *UpdateSmsEventRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

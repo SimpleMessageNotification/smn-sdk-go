@@ -1,7 +1,7 @@
 package main
 
 import (
-	"smn-sdk-go/client"
+	"github.com/smn-sdk-go/smn-sdk-go/client"
 	"fmt"
 )
 

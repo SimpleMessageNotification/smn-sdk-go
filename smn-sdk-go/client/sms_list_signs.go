@@ -12,14 +12,16 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of list sms signs
 type ListSmsSignsRequest struct {
 	*BaseRequest
 }
 
+// the response data of list sms signs
 type ListSmsSignsResponse struct {
 	*BaseResponse
 	SmsSignCount int           `json:"sms_sign_count"`
@@ -34,6 +36,7 @@ type SmsSignInfo struct {
 	Status     int    `json:"status"`
 }
 
+// send request to list sms signs
 func (client *SmnClient) ListSmsSigns(request *ListSmsSignsRequest) (response *ListSmsSignsResponse, err error) {
 	response = &ListSmsSignsResponse{
 		BaseResponse: &BaseResponse{},
@@ -42,6 +45,7 @@ func (client *SmnClient) ListSmsSigns(request *ListSmsSignsRequest) (response *L
 	return
 }
 
+// create a new list sms signs request struct
 func (client *SmnClient) NewListSmsSignsRequest() (request *ListSmsSignsRequest) {
 	request = &ListSmsSignsRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -49,15 +53,18 @@ func (client *SmnClient) NewListSmsSignsRequest() (request *ListSmsSignsRequest)
 	return
 }
 
+// get the url of the list sms signs request
 func (request *ListSmsSignsRequest) GetUrl() (string, error) {
 	return request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.SmsSignature, nil
 }
 
+// get the http method of the list sms signs request
 func (request *ListSmsSignsRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body params
 func (request *ListSmsSignsRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

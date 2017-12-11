@@ -12,11 +12,12 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of update topic attribute
 type UpdateTopicAttributeRequest struct {
 	*BaseRequest
 	TopicUrn string `json:"-"`
@@ -24,10 +25,12 @@ type UpdateTopicAttributeRequest struct {
 	Value    string `json:"value"`
 }
 
+// the response data of update topic attribute
 type UpdateTopicAttributeResponse struct {
 	*BaseResponse
 }
 
+// send request to update topic
 func (client *SmnClient) UpdateTopicAttribute(request *UpdateTopicAttributeRequest) (response *UpdateTopicAttributeResponse, err error) {
 	response = &UpdateTopicAttributeResponse{
 		BaseResponse: &BaseResponse{},
@@ -36,6 +39,7 @@ func (client *SmnClient) UpdateTopicAttribute(request *UpdateTopicAttributeReque
 	return
 }
 
+// create a new update topic attribute request struct
 func (client *SmnClient) NewUpdateTopicAttributeRequest() (request *UpdateTopicAttributeRequest) {
 	request = &UpdateTopicAttributeRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -43,6 +47,7 @@ func (client *SmnClient) NewUpdateTopicAttributeRequest() (request *UpdateTopicA
 	return
 }
 
+// get the url of the update topic attribute request
 func (request *UpdateTopicAttributeRequest) GetUrl() (string, error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -54,10 +59,12 @@ func (request *UpdateTopicAttributeRequest) GetUrl() (string, error) {
 		util.Attributes + util.UrlDelimiter + request.Name, nil
 }
 
+// get the http method of the update topic attribute request
 func (request *UpdateTopicAttributeRequest) GetMethod() string {
 	return util.PUT
 }
 
+// get the body params of the update topic attribute request
 func (request *UpdateTopicAttributeRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

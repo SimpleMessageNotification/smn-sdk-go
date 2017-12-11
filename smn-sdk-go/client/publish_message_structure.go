@@ -13,21 +13,25 @@ package client
 
 import (
 	"fmt"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+//the request data of publish message with structure
 type PublishMessageStructureRequest struct {
 	*BaseRequest
 	TopicUrn         string            `json:"-"`
 	Subject          string            `json:"subject"`
 	MessageStructure string `json:"message_structure"`
 }
+
+//the response data of publish message with structure
 type PublishMessageStructureResponse struct {
 	*BaseResponse
 	MessageId string `json:"message_id"`
 }
 
+// send request to publish message with structure
 func (client *SmnClient) PublishMessageStructure(request *PublishMessageStructureRequest) (response *PublishMessageStructureResponse, err error) {
 	response = &PublishMessageStructureResponse{
 		BaseResponse: &BaseResponse{},
@@ -36,6 +40,7 @@ func (client *SmnClient) PublishMessageStructure(request *PublishMessageStructur
 	return
 }
 
+// create a new publish message structure request struct
 func (client *SmnClient) NewPublishMessageStructureRequest() (request *PublishMessageStructureRequest) {
 	request = &PublishMessageStructureRequest{
 		BaseRequest:      &BaseRequest{Headers: make(map[string]string)},
@@ -43,6 +48,7 @@ func (client *SmnClient) NewPublishMessageStructureRequest() (request *PublishMe
 	return
 }
 
+// get the url of the publish message structure request
 func (request *PublishMessageStructureRequest) GetUrl() (string, error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -70,10 +76,12 @@ func (request *PublishMessageStructureRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.TopicUrn + util.UrlDelimiter + util.Publish, nil
 }
 
+// get the http method of the publish message structure request
 func (request *PublishMessageStructureRequest) GetMethod() string {
 	return util.POST
 }
 
+// get the body params of the publish message structure request
 func (request *PublishMessageStructureRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

@@ -12,22 +12,25 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of create topic
 type CreateTopicRequest struct {
 	*BaseRequest
 	Name        string `json:"name"`
 	DisplayName string `json:"display_name"`
 }
 
+// the response data of create topic
 type CreateTopicResponse struct {
 	*BaseResponse
 	TopicUrn string `json:"topic_urn"`
 }
 
+// send request to create topic
 func (client *SmnClient) CreateTopic(request *CreateTopicRequest) (response *CreateTopicResponse, err error) {
 	response = &CreateTopicResponse{
 		BaseResponse: &BaseResponse{},
@@ -36,6 +39,7 @@ func (client *SmnClient) CreateTopic(request *CreateTopicRequest) (response *Cre
 	return
 }
 
+// create a new create topic request struct
 func (client *SmnClient) NewCreateTopicRequest() (request *CreateTopicRequest) {
 	request = &CreateTopicRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -43,6 +47,7 @@ func (client *SmnClient) NewCreateTopicRequest() (request *CreateTopicRequest) {
 	return
 }
 
+// get the url of the create topic request
 func (request *CreateTopicRequest) GetUrl() (string, error) {
 	if !util.ValidateTopicName(request.Name) {
 		return "", fmt.Errorf("topic name is invalid")
@@ -55,10 +60,12 @@ func (request *CreateTopicRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.Topics, nil
 }
 
+// get the http method of the create topic request
 func (request *CreateTopicRequest) GetMethod() string {
 	return util.POST
 }
 
+// get the body params of the create topic request
 func (request *CreateTopicRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

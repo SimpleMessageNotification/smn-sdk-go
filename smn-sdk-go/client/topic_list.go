@@ -12,22 +12,25 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of list topic
 type ListTopicRequest struct {
 	*BaseRequest
 	Limit  string `json:"limit"`
 	Offset string `json:"offset"`
 }
 
+// the response data of list topic
 type ListTopicResponse struct {
 	*BaseResponse
 	TopicCount int         `json:"topic_count"`
 	Topics     []TopicInfo `json:"topics"`
 }
 
+// topic info data
 type TopicInfo struct {
 	TopicUrn    string `json:"topic_urn"`
 	DisplayName string `json:"display_name"`
@@ -35,6 +38,7 @@ type TopicInfo struct {
 	PushPolicy  int    `json:"push_policy"`
 }
 
+// send request to list topic
 func (client *SmnClient) ListTopic(request *ListTopicRequest) (response *ListTopicResponse, err error) {
 	response = &ListTopicResponse{
 		BaseResponse: &BaseResponse{},
@@ -43,6 +47,7 @@ func (client *SmnClient) ListTopic(request *ListTopicRequest) (response *ListTop
 	return
 }
 
+// create a new list topic request struct
 func (client *SmnClient) NewListTopicRequest() (request *ListTopicRequest) {
 	request = &ListTopicRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -52,6 +57,7 @@ func (client *SmnClient) NewListTopicRequest() (request *ListTopicRequest) {
 	return
 }
 
+// get the url of the list topic request
 func (request *ListTopicRequest) GetUrl() (urlStr string, err error) {
 	urlStr = request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.Topics
@@ -64,10 +70,12 @@ func (request *ListTopicRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the list topic request
 func (request *ListTopicRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body param
 func (request *ListTopicRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

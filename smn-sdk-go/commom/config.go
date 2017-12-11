@@ -11,6 +11,7 @@
  */
 package commom
 
+// the smn config of user info
 type SmnConfiguration struct {
 	Username   string
 	DomainName string

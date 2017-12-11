@@ -1,21 +1,35 @@
+/*
+ * Copyright (C) 2017. Huawei Technologies Co., LTD. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of Apache License, Version 2.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * Apache License, Version 2.0 for more details.
+ */
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"fmt"
 	"io"
 )
 
+//the request data of update message template
 type UpdateMessageTemplateRequest struct {
 	*BaseRequest
 	Content           string `json:"content"`
 	MessageTemplateId string `json:"-"`
 }
 
+//the response data of update message template
 type UpdateMessageTemplateResponse struct {
 	*BaseResponse
 }
 
+// send request to update message template
 func (client *SmnClient) UpdateMessageTemplate(request *UpdateMessageTemplateRequest) (response *UpdateMessageTemplateResponse, err error) {
 	response = &UpdateMessageTemplateResponse{
 		BaseResponse: &BaseResponse{},
@@ -24,6 +38,7 @@ func (client *SmnClient) UpdateMessageTemplate(request *UpdateMessageTemplateReq
 	return
 }
 
+// create a new update message template request struct
 func (client *SmnClient) NewUpdateMessageTemplateRequest() (request *UpdateMessageTemplateRequest) {
 	request = &UpdateMessageTemplateRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -31,6 +46,7 @@ func (client *SmnClient) NewUpdateMessageTemplateRequest() (request *UpdateMessa
 	return
 }
 
+// get the url of the update message template request
 func (request *UpdateMessageTemplateRequest) GetUrl() (string, error) {
 
 	if request.MessageTemplateId == "" {
@@ -46,10 +62,12 @@ func (request *UpdateMessageTemplateRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.MessageTemplateId, nil
 }
 
+// get the http method of the update message template request
 func (request *UpdateMessageTemplateRequest) GetMethod() string {
 	return util.PUT
 }
 
+// get the body params of the update message template request
 func (request *UpdateMessageTemplateRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

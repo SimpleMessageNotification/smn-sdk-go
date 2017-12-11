@@ -12,11 +12,12 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of subscribe
 type SubscribeRequest struct {
 	*BaseRequest
 	TopicUrn string `json:"-"`
@@ -25,11 +26,13 @@ type SubscribeRequest struct {
 	Remark   string `json:"remark"`
 }
 
+// the response data of subscribe
 type SubscribeResponse struct {
 	*BaseResponse
 	SubscriptionUrn string `json:"subscription_urn"`
 }
 
+// send request to subscribe
 func (client *SmnClient) Subscribe(request *SubscribeRequest) (response *SubscribeResponse, err error) {
 	response = &SubscribeResponse{
 		BaseResponse: &BaseResponse{},
@@ -38,6 +41,7 @@ func (client *SmnClient) Subscribe(request *SubscribeRequest) (response *Subscri
 	return
 }
 
+// create a new subscribe request struct
 func (client *SmnClient) NewSubscribeRequest() (request *SubscribeRequest) {
 	request = &SubscribeRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -45,6 +49,7 @@ func (client *SmnClient) NewSubscribeRequest() (request *SubscribeRequest) {
 	return
 }
 
+// get the url of the subscribe request
 func (request *SubscribeRequest) GetUrl() (urlStr string, err error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -54,10 +59,12 @@ func (request *SubscribeRequest) GetUrl() (urlStr string, err error) {
 		request.TopicUrn + util.UrlDelimiter + util.Subscriptions, nil
 }
 
+// get the http method of the subscribe request
 func (request *SubscribeRequest) GetMethod() string {
 	return util.POST
 }
 
+// get the body params of the subscribe request
 func (request *SubscribeRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

@@ -12,16 +12,18 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of query topic detail
 type QueryTopicDetailRequest struct {
 	*BaseRequest
 	TopicUrn string
 }
 
+// the response data of query topic detail
 type QueryTopicDetailResponse struct {
 	*BaseResponse
 	TopicUrn    string `json:"topic_urn"`
@@ -32,6 +34,7 @@ type QueryTopicDetailResponse struct {
 	UpdateTime  string `json:"update_time"`
 }
 
+// send request to query topic detail
 func (client *SmnClient) QueryTopicDetail(request *QueryTopicDetailRequest) (response *QueryTopicDetailResponse, err error) {
 	response = &QueryTopicDetailResponse{
 		BaseResponse: &BaseResponse{},
@@ -40,6 +43,7 @@ func (client *SmnClient) QueryTopicDetail(request *QueryTopicDetailRequest) (res
 	return
 }
 
+// create a new query topic detail request struct
 func (client *SmnClient) NewQueryTopicDetailRequest() (request *QueryTopicDetailRequest) {
 	request = &QueryTopicDetailRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -47,6 +51,7 @@ func (client *SmnClient) NewQueryTopicDetailRequest() (request *QueryTopicDetail
 	return
 }
 
+// get the url of the query topic detail request
 func (request *QueryTopicDetailRequest) GetUrl() (string, error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -57,10 +62,12 @@ func (request *QueryTopicDetailRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.TopicUrn, nil
 }
 
+// get the http method of the query topic detail request
 func (request *QueryTopicDetailRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body param
 func (request *QueryTopicDetailRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

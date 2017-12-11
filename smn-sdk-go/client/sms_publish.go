@@ -12,11 +12,12 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of publish sms
 type SmsPublishRequest struct {
 	*BaseRequest
 	Message  string `json:"message""`
@@ -24,11 +25,13 @@ type SmsPublishRequest struct {
 	SignId   string `json:"sign_id"`
 }
 
+// the response data of publish sms
 type SmsPublishResponse struct {
 	*BaseResponse
 	MessageId string `json:"message_id""`
 }
 
+// send request to publish sms
 func (client *SmnClient) SmsPublish(request *SmsPublishRequest) (response *SmsPublishResponse, err error) {
 	response = &SmsPublishResponse{
 		BaseResponse: &BaseResponse{},
@@ -37,6 +40,7 @@ func (client *SmnClient) SmsPublish(request *SmsPublishRequest) (response *SmsPu
 	return
 }
 
+// create a new list sms publish request struct
 func (client *SmnClient) NewSmsPublishRequest() (request *SmsPublishRequest) {
 	request = &SmsPublishRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -44,6 +48,7 @@ func (client *SmnClient) NewSmsPublishRequest() (request *SmsPublishRequest) {
 	return
 }
 
+// get the url of the list sms publish request
 func (request *SmsPublishRequest) GetUrl() (string, error) {
 	if request.Message == "" {
 		return "", fmt.Errorf("message is null")
@@ -61,10 +66,12 @@ func (request *SmsPublishRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.SmnProtocolSms, nil
 }
 
+// get the http method of the sms publish request
 func (request *SmsPublishRequest) GetMethod() string {
 	return util.POST
 }
 
+// get the body params of the sms publish request
 func (request *SmsPublishRequest) GetBodyReader() (reader io.Reader, err error) {
 	return util.GetBodyParams(request)
 }

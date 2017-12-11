@@ -12,22 +12,25 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of list subscriptions
 type ListSubscriptionsRequest struct {
 	*BaseRequest
 	Limit  string `json:"limit"`
 	Offset string `json:"offset"`
 }
 
+// the response data of list subscriptions
 type ListSubscriptionsResponse struct {
 	*BaseResponse
 	SubscriptionCount int                `json:"subscription_count"`
 	Subscriptions     []SubscriptionInfo `json:"subscriptions"`
 }
 
+// the subscription data info
 type SubscriptionInfo struct {
 	TopicUrn        string `json:"topic_urn"`
 	Protocol        string `json:"protocol"`
@@ -38,6 +41,7 @@ type SubscriptionInfo struct {
 	Status          int    `json:"status"`
 }
 
+// send request to list subscriptions
 func (client *SmnClient) ListSubscriptions(request *ListSubscriptionsRequest) (response *ListSubscriptionsResponse, err error) {
 	response = &ListSubscriptionsResponse{
 		BaseResponse: &BaseResponse{},
@@ -46,6 +50,7 @@ func (client *SmnClient) ListSubscriptions(request *ListSubscriptionsRequest) (r
 	return
 }
 
+// create a new list subscriptions request struct
 func (client *SmnClient) NewListSubscriptionsRequest() (request *ListSubscriptionsRequest) {
 	request = &ListSubscriptionsRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -55,6 +60,7 @@ func (client *SmnClient) NewListSubscriptionsRequest() (request *ListSubscriptio
 	return
 }
 
+// get the url of the list subscriptions request
 func (request *ListSubscriptionsRequest) GetUrl() (urlStr string, err error) {
 	urlStr = request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +
 		util.UrlDelimiter + util.Notifications + util.UrlDelimiter + util.Subscriptions
@@ -67,10 +73,12 @@ func (request *ListSubscriptionsRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the list subscriptions request
 func (request *ListSubscriptionsRequest) GetMethod() string {
 	return util.GET
 }
 
+// no body param
 func (request *ListSubscriptionsRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

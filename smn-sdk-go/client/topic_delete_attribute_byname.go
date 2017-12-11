@@ -13,20 +13,23 @@ package client
 
 import (
 	"fmt"
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 
+// the request data of delete topic attribute by name
 type DeleteTopicAttributeByNameRequest struct {
 	*BaseRequest
 	TopicUrn string
 	Name     string
 }
 
+// the response data of delete topic attribute by name
 type DeleteTopicAttributeByNameResponse struct {
 	*BaseResponse
 }
 
+// send request to delete topic attribute by name
 func (client *SmnClient) DeleteTopicAttributeByName(request *DeleteTopicAttributeByNameRequest) (response *DeleteTopicAttributeByNameResponse, err error) {
 	response = &DeleteTopicAttributeByNameResponse{
 		BaseResponse: &BaseResponse{},
@@ -35,6 +38,7 @@ func (client *SmnClient) DeleteTopicAttributeByName(request *DeleteTopicAttribut
 	return
 }
 
+// create a new delete topic attribute by name request struct
 func (client *SmnClient) NewDeleteTopicAttributeByNameRequest() (request *DeleteTopicAttributeByNameRequest) {
 	request = &DeleteTopicAttributeByNameRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -42,6 +46,7 @@ func (client *SmnClient) NewDeleteTopicAttributeByNameRequest() (request *Delete
 	return
 }
 
+// get the url of the delete topic attribute by name request
 func (request *DeleteTopicAttributeByNameRequest) GetUrl() (urlStr string, err error) {
 	if request.TopicUrn == "" {
 		return "", fmt.Errorf("topic urn is null")
@@ -56,10 +61,12 @@ func (request *DeleteTopicAttributeByNameRequest) GetUrl() (urlStr string, err e
 	return
 }
 
+// get the http method of the delete topic attribute by name request
 func (request *DeleteTopicAttributeByNameRequest) GetMethod() string {
 	return util.DELETE
 }
 
+// nobody param
 func (request *DeleteTopicAttributeByNameRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

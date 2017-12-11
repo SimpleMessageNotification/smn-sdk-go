@@ -1,20 +1,34 @@
+/*
+ * Copyright (C) 2017. Huawei Technologies Co., LTD. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of Apache License, Version 2.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * Apache License, Version 2.0 for more details.
+ */
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"fmt"
 	"io"
 )
 
+//the request data of delete message template
 type DeleteMessageTemplateRequest struct {
 	*BaseRequest
 	MessageTemplateId string
 }
 
+// the response data of delete message template
 type DeleteMessageTemplateResponse struct {
 	*BaseResponse
 }
 
+// send request to delete message template
 func (client *SmnClient) DeleteMessageTemplate(request *DeleteMessageTemplateRequest) (response *DeleteMessageTemplateResponse, err error) {
 	response = &DeleteMessageTemplateResponse{
 		BaseResponse: &BaseResponse{},
@@ -23,6 +37,7 @@ func (client *SmnClient) DeleteMessageTemplate(request *DeleteMessageTemplateReq
 	return
 }
 
+// create a new delete message template request
 func (client *SmnClient) NewDeleteMessageTemplateRequest() (request *DeleteMessageTemplateRequest) {
 	request = &DeleteMessageTemplateRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -30,6 +45,7 @@ func (client *SmnClient) NewDeleteMessageTemplateRequest() (request *DeleteMessa
 	return
 }
 
+// get the url of the delete message template request
 func (request *DeleteMessageTemplateRequest) GetUrl() (string, error) {
 
 	if request.MessageTemplateId == "" {
@@ -41,10 +57,12 @@ func (request *DeleteMessageTemplateRequest) GetUrl() (string, error) {
 		util.UrlDelimiter + request.MessageTemplateId, nil
 }
 
+// get the http method of the delete message template request
 func (request *DeleteMessageTemplateRequest) GetMethod() string {
 	return util.DELETE
 }
 
+// no body params
 func (request *DeleteMessageTemplateRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }

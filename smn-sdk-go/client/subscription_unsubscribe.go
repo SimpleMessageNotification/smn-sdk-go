@@ -12,20 +12,23 @@
 package client
 
 import (
-	"smn-sdk-go/util"
+	"github.com/smn-sdk-go/smn-sdk-go/util"
 	"io"
 	"fmt"
 )
 
+// the request data of unSubscribe
 type UnsubscribeRequest struct {
 	*BaseRequest
 	SubscriptionUrn string
 }
 
+// the response data of unSubscribe
 type UnsubscribeResponse struct {
 	*BaseResponse
 }
 
+// send request to unSubscribe
 func (client *SmnClient) Unsubscribe(request *UnsubscribeRequest) (response *UnsubscribeResponse, err error) {
 	response = &UnsubscribeResponse{
 		BaseResponse: &BaseResponse{},
@@ -34,6 +37,7 @@ func (client *SmnClient) Unsubscribe(request *UnsubscribeRequest) (response *Uns
 	return
 }
 
+// create a new unSubscribe request struct
 func (client *SmnClient) NewUnsubscribeRequest() (request *UnsubscribeRequest) {
 	request = &UnsubscribeRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
@@ -41,6 +45,7 @@ func (client *SmnClient) NewUnsubscribeRequest() (request *UnsubscribeRequest) {
 	return
 }
 
+// get the url of the unSubscribe request
 func (request *UnsubscribeRequest) GetUrl() (urlStr string, err error) {
 	if request.SubscriptionUrn == "" {
 		return "", fmt.Errorf("subscription urn is null")
@@ -52,10 +57,12 @@ func (request *UnsubscribeRequest) GetUrl() (urlStr string, err error) {
 	return
 }
 
+// get the http method of the unSubscribe request
 func (request *UnsubscribeRequest) GetMethod() string {
 	return util.DELETE
 }
 
+// get the body params of the unSubscribe request
 func (request *UnsubscribeRequest) GetBodyReader() (reader io.Reader, err error) {
 	return nil, nil
 }
