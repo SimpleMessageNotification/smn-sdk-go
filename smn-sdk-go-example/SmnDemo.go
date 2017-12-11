@@ -14,6 +14,16 @@ func main() {
 		panic(err)
 	}
 
+	// if you want to config http. you can use like this
+	//transport := &http.Transport{}
+	//config := commom.NewClientConfig()
+	//config.SetTimeout(20 * time.Second)
+	//config.SetTransport(transport)
+	//tempClient, err := client.NewClientWithConfig("youUserName", "youDomainName", "youPassword", "cn-north-1", config)
+	//if err != nil {
+	//	panic(err)
+	//}
+
 	smnClient = &tempClient
 	// send sms
 	SmsPublish()
@@ -457,7 +467,6 @@ func PublishMessageTemplate() {
 
 	fmt.Printf("%#v\n", response)
 }
-
 
 func ListSubscriptions() {
 	request := smnClient.NewListSubscriptionsRequest()

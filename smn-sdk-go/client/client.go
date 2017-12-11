@@ -28,9 +28,21 @@ type SmnClient struct {
 }
 
 func NewClient(userName, domainName, password, regionName string) (client SmnClient, err error) {
+	return NewClientWithConfig(userName, domainName, password, regionName, nil)
+}
+
+func NewClientWithConfig(userName, domainName, password, regionName string, config *commom.ClientConfiguration) (client SmnClient, err error) {
 	smnConfiguration := &commom.SmnConfiguration{Username: userName, DomainName: domainName, Password: password, RegionName: regionName}
 	client.smnConfiguration = smnConfiguration
 	httpClient := &http.Client{}
+
+	if config != nil && config.Transport != nil {
+		httpClient.Transport = config.Transport
+	}
+	if config != nil && config.Timeout > 0 {
+		httpClient.Timeout = config.Timeout
+	}
+
 	client.httpClient = httpClient
 	client.auth = auth.NewAuth(smnConfiguration, httpClient)
 	return
