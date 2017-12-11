@@ -48,6 +48,44 @@ func main() {
 	DeleteTopicAttributeByName()
 	// delete all topic attributes
 	DeleteTopicAttributes()
+
+	//publish message
+	PublishMessage()
+	// publish message structure
+	PublishMessageStructure()
+	// publish message template
+	PublishMessageTemplate()
+	// list sms signs
+	ListSmsSigns()
+	// delete sms sign
+	DeleteSmsSign()
+	// list sms msg report
+	ListSmsMsgReport()
+	// get sms message content
+	GetSmsMessage()
+	// list sms callback event
+	ListSmsEvent()
+	// update sms callback event
+	UpdateSmsEvent()
+
+	// create topic
+	CreateTopic()
+	// update topic
+	UpdateTopic()
+	// delete topic
+	DeleteTopic()
+	// list topics
+	ListTopic()
+	// query topic detail
+	QueryTopicDetail()
+	// update topic attribute
+	UpdateTopicAttribute()
+	// list topic attributes
+	ListTopicAttributes()
+	// delete topic attribute by name
+	DeleteTopicAttributeByName()
+	// delete all topic attributes
+	DeleteTopicAttributes()
 }
 
 // send sms
@@ -359,3 +397,63 @@ func DeleteTopicAttributes() {
 
 	fmt.Printf("%#v\n", response)
 }
+
+func PublishMessage() {
+	request := smnClient.NewPublishMessageRequest()
+	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
+	request.Message = "test by zhangyx"
+	response, err := smnClient.PublishMessage(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func PublishMessageStructure() {
+	request := smnClient.NewPublishMessageStructureRequest()
+	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
+	request.MessageStructure = "{" +
+		"\"default\":\"test by zhangyx structure\"," +
+		"\"email\":\"test by zhangyx structure email\"," +
+		"\"sms\":\"test by zhangyx structure _sms\"}"
+	response, err := smnClient.PublishMessageStructure(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func PublishMessageTemplate() {
+	request := smnClient.NewPublishMessageTemplateRequest()
+	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
+	request.MessageTemplateName = "createMessageTemplate"
+	request.Tags["year"] = "2016"
+	request.Tags["company"] = "hellokitty"
+	response, err := smnClient.PublishMessageTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
