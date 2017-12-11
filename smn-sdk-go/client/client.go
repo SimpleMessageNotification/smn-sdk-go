@@ -36,6 +36,24 @@ func NewClient(userName, domainName, password, regionName string) (client SmnCli
 	return
 }
 
+func NewClientWithConfig(userName, domainName, password, regionName string, config *commom.ClientConfiguration) (client SmnClient, err error) {
+	smnConfiguration := &commom.SmnConfiguration{Username: userName, DomainName: domainName, Password: password, RegionName: regionName}
+	client.smnConfiguration = smnConfiguration
+	httpClient := &http.Client{}
+
+	if config.Transport != nil {
+		httpClient.Transport = config.Transport
+	}
+
+	if config.Timeout > 0 {
+		httpClient.Timeout = config.Timeout
+	}
+
+	client.httpClient = httpClient
+	client.auth = auth.NewAuth(smnConfiguration, httpClient)
+	return
+}
+
 func (client *SmnClient) sendRequest(request SmnRequest, response SmnResponse) (err error) {
 	if err := client.buildHeaderAndParam(request); err != nil {
 		return err
