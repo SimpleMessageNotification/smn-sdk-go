@@ -28,12 +28,7 @@ type SmnClient struct {
 }
 
 func NewClient(userName, domainName, password, regionName string) (client SmnClient, err error) {
-	smnConfiguration := &commom.SmnConfiguration{Username: userName, DomainName: domainName, Password: password, RegionName: regionName}
-	client.smnConfiguration = smnConfiguration
-	httpClient := &http.Client{}
-	client.httpClient = httpClient
-	client.auth = auth.NewAuth(smnConfiguration, httpClient)
-	return
+	return NewClientWithConfig(userName, domainName, password, regionName, nil)
 }
 
 func NewClientWithConfig(userName, domainName, password, regionName string, config *commom.ClientConfiguration) (client SmnClient, err error) {
@@ -41,11 +36,10 @@ func NewClientWithConfig(userName, domainName, password, regionName string, conf
 	client.smnConfiguration = smnConfiguration
 	httpClient := &http.Client{}
 
-	if config.Transport != nil {
+	if config != nil && config.Transport != nil {
 		httpClient.Transport = config.Transport
 	}
-
-	if config.Timeout > 0 {
+	if config != nil && config.Timeout > 0 {
 		httpClient.Timeout = config.Timeout
 	}
 
