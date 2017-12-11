@@ -68,24 +68,14 @@ func main() {
 	// update sms callback event
 	UpdateSmsEvent()
 
-	// create topic
-	CreateTopic()
-	// update topic
-	UpdateTopic()
-	// delete topic
-	DeleteTopic()
-	// list topics
-	ListTopic()
-	// query topic detail
-	QueryTopicDetail()
-	// update topic attribute
-	UpdateTopicAttribute()
-	// list topic attributes
-	ListTopicAttributes()
-	// delete topic attribute by name
-	DeleteTopicAttributeByName()
-	// delete all topic attributes
-	DeleteTopicAttributes()
+	//list subscriptions
+	ListSubscriptions()
+	//list subscriptions by topic
+	ListSubscriptionsByTopic()
+	// un subscribe
+	Unsubscribe()
+	//Subscribe
+	Subscribe()
 }
 
 // send sms
@@ -444,6 +434,81 @@ func PublishMessageTemplate() {
 	request.Tags["year"] = "2016"
 	request.Tags["company"] = "hellokitty"
 	response, err := smnClient.PublishMessageTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+
+func ListSubscriptions() {
+	request := smnClient.NewListSubscriptionsRequest()
+	request.Limit = "10"
+	request.Offset = "0"
+	response, err := smnClient.ListSubscriptions(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func ListSubscriptionsByTopic() {
+	request := smnClient.NewListSubscriptionsByTopicRequest()
+	request.Limit = "10"
+	request.Offset = "0"
+	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
+	response, err := smnClient.ListSubscriptionsByTopic(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func Subscribe() {
+	request := smnClient.NewSubscribeRequest()
+	request.Endpoint = "375831500@qq.com"
+	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
+	request.Protocol = "email"
+	request.Remark = "email"
+	response, err := smnClient.Subscribe(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func Unsubscribe() {
+	request := smnClient.NewUnsubscribeRequest()
+	request.SubscriptionUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go:9e52cb38e107402d83cae90fa8b9f6ed"
+	response, err := smnClient.Unsubscribe(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)
 		return
