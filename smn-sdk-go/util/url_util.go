@@ -1,0 +1,38 @@
+package util
+
+import (
+	"encoding/json"
+	"net/url"
+	"io"
+	"strings"
+)
+
+// get the request query params
+func GetQueryParams(request interface{}) (urlEncoded string, err error) {
+	jsonStr, err := json.Marshal(request)
+	if err != nil {
+		return
+	}
+	var result map[string]interface{}
+	if err = json.Unmarshal(jsonStr, &result); err != nil {
+		return
+	}
+
+	urlEncoder := url.Values{}
+	for key, value := range result {
+		if value != "" {
+			urlEncoder.Add(key, value.(string))
+		}
+	}
+	urlEncoded = urlEncoder.Encode()
+	return
+}
+
+// get the request body params
+func GetBodyParams(request interface{}) (reader io.Reader, err error) {
+	jsonStr, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
+	}
+	return strings.NewReader(string(jsonStr)), nil
+}
