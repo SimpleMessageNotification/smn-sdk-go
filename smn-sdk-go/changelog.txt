@@ -1,0 +1,2 @@
+2017-12-14 version 1.0.0
+1. create smn(Simple Message Notification),  implement all api interfaces

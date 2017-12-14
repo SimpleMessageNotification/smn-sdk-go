@@ -13,8 +13,8 @@ package client
 
 import (
 	"net/http"
-	"github.com/smn-sdk-go/smn-sdk-go/commom"
-	"github.com/smn-sdk-go/smn-sdk-go/auth"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/auth"
 	"fmt"
 	"encoding/json"
 )

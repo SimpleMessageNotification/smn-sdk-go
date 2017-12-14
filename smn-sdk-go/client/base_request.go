@@ -13,7 +13,7 @@ package client
 
 import (
 	"io"
-	"github.com/smn-sdk-go/smn-sdk-go/util"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/util"
 )
 
 // the base request info

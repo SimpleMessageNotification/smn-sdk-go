@@ -12,7 +12,7 @@
 package client
 
 import (
-	"github.com/smn-sdk-go/smn-sdk-go/util"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/util"
 	"io"
 )
 

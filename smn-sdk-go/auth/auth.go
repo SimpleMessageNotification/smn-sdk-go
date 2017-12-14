@@ -12,8 +12,8 @@
 package auth
 
 import (
-	"github.com/smn-sdk-go/smn-sdk-go/commom"
-	"github.com/smn-sdk-go/smn-sdk-go/util"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/util"
 	"net/http"
 	"strings"
 	"io/ioutil"
