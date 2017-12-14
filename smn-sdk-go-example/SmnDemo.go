@@ -12,7 +12,7 @@
 package main
 
 import (
-	"github.com/smn-sdk-go/smn-sdk-go/client"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/client"
 	"fmt"
 )
 
