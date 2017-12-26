@@ -36,7 +36,7 @@ func (client *SmnClient) PublishMessage(request *PublishMessageRequest) (respons
 	response = &PublishMessageResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

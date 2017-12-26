@@ -43,7 +43,7 @@ func (client *SmnClient) ListTopic(request *ListTopicRequest) (response *ListTop
 	response = &ListTopicResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

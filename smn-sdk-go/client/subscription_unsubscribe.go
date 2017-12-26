@@ -33,7 +33,7 @@ func (client *SmnClient) Unsubscribe(request *UnsubscribeRequest) (response *Uns
 	response = &UnsubscribeResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

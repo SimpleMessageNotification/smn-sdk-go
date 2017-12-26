@@ -51,7 +51,7 @@ func NewClientWithConfig(userName, domainName, password, regionName string, conf
 	return
 }
 
-func (client *SmnClient) sendRequest(request SmnRequest, response SmnResponse) (err error) {
+func (client *SmnClient) SendRequest(request SmnRequest, response SmnResponse) (err error) {
 	if err := client.buildHeaderAndParam(request); err != nil {
 		return err
 	}

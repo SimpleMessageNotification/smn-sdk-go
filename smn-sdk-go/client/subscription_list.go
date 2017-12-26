@@ -46,7 +46,7 @@ func (client *SmnClient) ListSubscriptions(request *ListSubscriptionsRequest) (r
 	response = &ListSubscriptionsResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

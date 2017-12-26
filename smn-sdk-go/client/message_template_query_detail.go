@@ -39,7 +39,7 @@ func (client *SmnClient) QueryMessageTemplateDetail(request *QueryMessageTemplat
 	response = &QueryMessageTemplateDetailResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

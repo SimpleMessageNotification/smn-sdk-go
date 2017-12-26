@@ -33,7 +33,7 @@ func (client *SmnClient) DeleteMessageTemplate(request *DeleteMessageTemplateReq
 	response = &DeleteMessageTemplateResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 
