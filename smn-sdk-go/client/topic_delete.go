@@ -33,7 +33,7 @@ func (client *SmnClient) DeleteTopic(request *DeleteTopicRequest) (response *Del
 	response = &DeleteTopicResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

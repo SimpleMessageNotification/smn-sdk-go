@@ -47,7 +47,7 @@ func (client *SmnClient) ListMessageTemplate(request *ListMessageTemplateRequest
 	response = &ListMessageTemplateResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

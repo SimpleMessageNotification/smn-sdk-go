@@ -20,10 +20,11 @@ var smnClient *client.SmnClient = nil
 
 func main() {
 	// init client
-	tempClient, err := client.NewClient("youUserName", "youDomainName", "youPassword", "cn-north-1")
-	if err != nil {
-		panic(err)
-	}
+	tempClient, err := client.NewClient(
+		"YourAccountUserName",
+		"YourAccountDomainName",
+		"YourAccountPassword",
+		"YourRegionName")
 
 	// if you want to config http. you can use like this
 	//transport := &http.Transport{}
@@ -31,9 +32,9 @@ func main() {
 	//config.SetTimeout(20 * time.Second)
 	//config.SetTransport(transport)
 	//tempClient, err := client.NewClientWithConfig("youUserName", "youDomainName", "youPassword", "cn-north-1", config)
-	//if err != nil {
-	//	panic(err)
-	//}
+	if err != nil {
+		panic(err)
+	}
 
 	smnClient = &tempClient
 	// send sms

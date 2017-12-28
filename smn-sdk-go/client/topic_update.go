@@ -34,7 +34,7 @@ func (client *SmnClient) UpdateTopic(request *UpdateTopicRequest) (response *Upd
 	response = &UpdateTopicResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

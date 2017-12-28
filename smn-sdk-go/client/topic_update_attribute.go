@@ -35,7 +35,7 @@ func (client *SmnClient) UpdateTopicAttribute(request *UpdateTopicAttributeReque
 	response = &UpdateTopicAttributeResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

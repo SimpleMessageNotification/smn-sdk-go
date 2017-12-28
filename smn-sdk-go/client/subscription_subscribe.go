@@ -37,7 +37,7 @@ func (client *SmnClient) Subscribe(request *SubscribeRequest) (response *Subscri
 	response = &SubscribeResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

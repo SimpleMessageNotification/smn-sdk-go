@@ -33,7 +33,7 @@ func (client *SmnClient) DeleteSmsSign(request *DeleteSmsSignRequest) (response 
 	response = &DeleteSmsSignResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

@@ -41,7 +41,7 @@ func (client *SmnClient) ListSmsSigns(request *ListSmsSignsRequest) (response *L
 	response = &ListSmsSignsResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 
