@@ -35,7 +35,7 @@ func (client *SmnClient) ListTopicAttributes(request *ListTopicAttributesRequest
 	response = &ListTopicAttributesResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

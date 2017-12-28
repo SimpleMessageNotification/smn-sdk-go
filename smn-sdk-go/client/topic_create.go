@@ -35,7 +35,7 @@ func (client *SmnClient) CreateTopic(request *CreateTopicRequest) (response *Cre
 	response = &CreateTopicResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

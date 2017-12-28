@@ -36,7 +36,7 @@ func (client *SmnClient) PublishMessageStructure(request *PublishMessageStructur
 	response = &PublishMessageStructureResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

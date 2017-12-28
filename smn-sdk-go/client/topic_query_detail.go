@@ -39,7 +39,7 @@ func (client *SmnClient) QueryTopicDetail(request *QueryTopicDetailRequest) (res
 	response = &QueryTopicDetailResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

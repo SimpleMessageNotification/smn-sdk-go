@@ -53,7 +53,7 @@ func (client *SmnClient) ListSmsMsgReport(request *ListSmsMsgReportRequest) (res
 	response = &ListSmsMsgReportResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

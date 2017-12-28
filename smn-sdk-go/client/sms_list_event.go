@@ -41,7 +41,7 @@ func (client *SmnClient) ListSmsEvent(request *ListSmsEventRequest) (response *L
 	response = &ListSmsEventResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

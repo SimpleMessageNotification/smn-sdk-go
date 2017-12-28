@@ -34,7 +34,7 @@ func (client *SmnClient) GetSmsMessage(request *GetSmsMessageRequest) (response 
 	response = &GetSmsMessageResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 

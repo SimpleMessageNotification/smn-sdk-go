@@ -33,7 +33,7 @@ func (client *SmnClient) UpdateSmsEvent(request *UpdateSmsEventRequest) (respons
 	response = &UpdateSmsEventResponse{
 		BaseResponse: &BaseResponse{},
 	}
-	err = client.sendRequest(request, response)
+	err = client.SendRequest(request, response)
 	return
 }
 
