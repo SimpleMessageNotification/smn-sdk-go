@@ -89,6 +89,8 @@ func (auth *Auth) postForToken() (err error) {
 	}
 
 	postReq.Header.Set("Content-Type", "application/json; charset=UTF-8")
+	postReq.Header.Set("User-Agent", "smn-sdk-go/"+util.Version)
+	postReq.Header.Set("X-Smn-Sdk", "smn-sdk-go/"+util.Version)
 
 	resp, err := auth.httpClient.Do(postReq)
 	if err != nil {

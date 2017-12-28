@@ -17,9 +17,8 @@ import (
 	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/auth"
 	"fmt"
 	"encoding/json"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/util"
 )
-
-var version = "1.0.0"
 
 // the smn client to use smn
 type SmnClient struct {
@@ -104,6 +103,7 @@ func (client *SmnClient) buildHeaderAndParam(request SmnRequest) (err error) {
 	request.addHeaderParam("region", client.smnConfiguration.RegionName)
 	request.addHeaderParam("X-Auth-Token", token)
 	request.addHeaderParam("X-Project-Id", projectId)
-	request.addHeaderParam("User-Agent", "smn-sdk-go/"+version)
+	request.addHeaderParam("User-Agent", "smn-sdk-go/"+util.Version)
+	request.addHeaderParam("X-Smn-Sdk", "smn-sdk-go/"+util.Version)
 	return
 }
