@@ -12,6 +12,7 @@
 package util
 
 const (
+	Version         = "1.0.0"
 	Smn             = "smn"
 	Iam             = "iam"
 	Endpoint        = "myhwclouds.com"
