@@ -21,7 +21,7 @@ const (
 	MaxTemplateContent  = 256 * 1024
 	MaxSubjectLength    = 512
 	MaxMessageLength    = 256 * 1024
-	PhoneMatchPattern   = "^\\+?[0-9]{1,31}"
+	PhoneMatchPattern   = "^\\+?[0-9]{1}[0-9 /\\-]{1,31}$"
 	TopicNamePattern    = "^[a-zA-Z0-9]{1}[-_a-zA-Z0-9]{0,255}$"
 	TemplateNamePattern = "^[a-zA-Z0-9]{1}([-_a-zA-Z0-9]){0,64}"
 	SubjectPattern      = "^[^\\r\\n\\t\\f]+$"
