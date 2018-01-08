@@ -58,7 +58,7 @@ func (request *SmsPublishRequest) GetUrl() (string, error) {
 		return "", fmt.Errorf("signId is null")
 	}
 
-	if request.EndPoint == "" || !util.ValidatePhone(request.EndPoint) {
+	if request.EndPoint == "" {
 		return "", fmt.Errorf("endpoint is invalid")
 	}
 
