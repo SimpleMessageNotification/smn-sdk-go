@@ -8,11 +8,6 @@ import (
 	//"time"
 	//"net/url"
 	//"crypto/tls"
-	"net/http"
-	"net/url"
-	"crypto/tls"
-	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
-	"time"
 )
 
 func main() {
