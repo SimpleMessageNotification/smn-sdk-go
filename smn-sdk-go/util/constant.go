@@ -15,7 +15,7 @@ const (
 	Version         = "1.0.0"
 	Smn             = "smn"
 	Iam             = "iam"
-	Endpoint        = "myhwclouds.com"
+	Endpoint        = "myhuaweicloud.com"
 	HttpsPrefix     = "https://"
 	UrlDelimiter    = "/"
 	V2Version       = "v2"
