@@ -20,6 +20,8 @@ import (
 type ClientConfiguration struct {
 	Timeout   time.Duration
 	Transport *http.Transport
+	SmnHostUrl string
+	IamHostUrl string
 }
 
 // create a new client config
@@ -36,4 +38,14 @@ func (config *ClientConfiguration) SetTimeout(duration time.Duration) {
 // set transport
 func (config *ClientConfiguration) SetTransport(transport *http.Transport) {
 	config.Transport = transport
+}
+
+// set smn host url
+func(config *ClientConfiguration) setSmnHostUrl(smnHostUrl string) {
+	config.SmnHostUrl = smnHostUrl
+}
+
+// set iam host url
+func(config *ClientConfiguration) setIamHostUrl(iamHostUrl string) {
+	config.IamHostUrl = iamHostUrl
 }
