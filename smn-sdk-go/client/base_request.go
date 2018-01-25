@@ -63,7 +63,7 @@ func (request *BaseRequest) SetRegionName(regionName string) {
 // get smn service url
 func (request *BaseRequest) GetSmnServiceUrl() string {
 	if request.clientConfiguration != nil && request.clientConfiguration.SmnHostUrl != "" {
-		return request.clientConfiguration.SmnHostUrl
+		return request.clientConfiguration.SmnHostUrl + util.UrlDelimiter
 	}
 
 	return util.HttpsPrefix + util.Smn + "." + request.regionName + "." + util.Endpoint +

@@ -41,11 +41,11 @@ func (config *ClientConfiguration) SetTransport(transport *http.Transport) {
 }
 
 // set smn host url
-func(config *ClientConfiguration) setSmnHostUrl(smnHostUrl string) {
+func(config *ClientConfiguration) SetSmnHostUrl(smnHostUrl string) {
 	config.SmnHostUrl = smnHostUrl
 }
 
 // set iam host url
-func(config *ClientConfiguration) setIamHostUrl(iamHostUrl string) {
+func(config *ClientConfiguration) SetIamHostUrl(iamHostUrl string) {
 	config.IamHostUrl = iamHostUrl
 }
