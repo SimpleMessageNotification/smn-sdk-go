@@ -22,9 +22,10 @@ import (
 
 // the smn client to use smn
 type SmnClient struct {
-	httpClient       *http.Client
-	smnConfiguration *commom.SmnConfiguration
-	auth             *auth.Auth
+	httpClient          *http.Client
+	smnConfiguration    *commom.SmnConfiguration
+	clientConfiguration *commom.ClientConfiguration
+	auth                *auth.Auth
 }
 
 // create a new smn client without config
@@ -36,6 +37,7 @@ func NewClient(userName, domainName, password, regionName string) (client SmnCli
 func NewClientWithConfig(userName, domainName, password, regionName string, config *commom.ClientConfiguration) (client SmnClient, err error) {
 	smnConfiguration := &commom.SmnConfiguration{Username: userName, DomainName: domainName, Password: password, RegionName: regionName}
 	client.smnConfiguration = smnConfiguration
+	client.clientConfiguration = config
 	httpClient := &http.Client{}
 
 	if config != nil && config.Transport != nil {
@@ -46,7 +48,7 @@ func NewClientWithConfig(userName, domainName, password, regionName string, conf
 	}
 
 	client.httpClient = httpClient
-	client.auth = auth.NewAuth(smnConfiguration, httpClient)
+	client.auth = auth.NewAuth(smnConfiguration, config, httpClient)
 	return
 }
 
@@ -99,6 +101,7 @@ func (client *SmnClient) buildHeaderAndParam(request SmnRequest) (err error) {
 	}
 	request.SetProjectId(projectId)
 	request.SetRegionName(client.smnConfiguration.RegionName)
+	request.SetClientConfiguration(client.clientConfiguration)
 	request.addHeaderParam("Content-Type", "application/json; charset=UTF-8")
 	request.addHeaderParam("region", client.smnConfiguration.RegionName)
 	request.addHeaderParam("X-Auth-Token", token)

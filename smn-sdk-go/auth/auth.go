@@ -34,18 +34,20 @@ const (
 
 // used for user authentication
 type Auth struct {
-	smnConfiguration *commom.SmnConfiguration
-	httpClient       *http.Client
-	projectId        string
-	authToken        string
-	expiresTime      int64
+	smnConfiguration    *commom.SmnConfiguration
+	clientConfiguration *commom.ClientConfiguration
+	httpClient          *http.Client
+	projectId           string
+	authToken           string
+	expiresTime         int64
 }
 
 //create a new auth struct
-func NewAuth(smnConfiguration *commom.SmnConfiguration, client *http.Client) *Auth {
+func NewAuth(smnConfiguration *commom.SmnConfiguration, clientConfiguration *commom.ClientConfiguration, client *http.Client) *Auth {
 	auth := new(Auth)
 	auth.smnConfiguration = smnConfiguration
 	auth.httpClient = client
+	auth.clientConfiguration = clientConfiguration
 	return auth
 }
 
@@ -72,6 +74,10 @@ func (auth *Auth) isExpired() bool {
 }
 
 func (auth *Auth) getTokenUrl() (url string, err error) {
+	if auth.clientConfiguration != nil && auth.clientConfiguration.IamHostUrl != "" {
+		url = auth.clientConfiguration.IamHostUrl + "/v3/auth/tokens"
+		return
+	}
 	url = util.HttpsPrefix + util.Iam + "." + auth.smnConfiguration.RegionName + "." + util.Endpoint + "/v3/auth/tokens"
 	return
 }
