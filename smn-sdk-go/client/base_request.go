@@ -14,14 +14,16 @@ package client
 import (
 	"io"
 	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/util"
+	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
 )
 
 // the base request info
 type BaseRequest struct {
-	projectId  string `json:"-"`
-	url        string `json:"-"`
-	method     string `json:"-"`
-	regionName string `json:"-"`
+	projectId           string `json:"-"`
+	url                 string `json:"-"`
+	method              string `json:"-"`
+	regionName          string `json:"-"`
+	clientConfiguration *commom.ClientConfiguration `json:"-"`
 
 	Headers map[string]string `json:"-"`
 }
@@ -35,6 +37,7 @@ type SmnRequest interface {
 	SetProjectId(projectId string)
 	SetRegionName(regionName string)
 	addHeaderParam(key, value string)
+	SetClientConfiguration(clientConfiguration *commom.ClientConfiguration)
 }
 
 // get the request headers
@@ -59,6 +62,15 @@ func (request *BaseRequest) SetRegionName(regionName string) {
 
 // get smn service url
 func (request *BaseRequest) GetSmnServiceUrl() string {
+	if request.clientConfiguration != nil && request.clientConfiguration.SmnHostUrl != "" {
+		return request.clientConfiguration.SmnHostUrl + util.UrlDelimiter
+	}
+
 	return util.HttpsPrefix + util.Smn + "." + request.regionName + "." + util.Endpoint +
 		util.UrlDelimiter
+}
+
+// set client configuration
+func (request *BaseRequest) SetClientConfiguration(clientConfiguration *commom.ClientConfiguration) {
+	request.clientConfiguration = clientConfiguration
 }
