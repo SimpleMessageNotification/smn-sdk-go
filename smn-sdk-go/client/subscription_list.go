@@ -19,8 +19,8 @@ import (
 // the request data of list subscriptions
 type ListSubscriptionsRequest struct {
 	*BaseRequest
-	Limit  string `json:"limit"`
-	Offset string `json:"offset"`
+	Limit  int `json:"limit"`
+	Offset int `json:"offset"`
 }
 
 // the response data of list subscriptions
@@ -54,8 +54,8 @@ func (client *SmnClient) ListSubscriptions(request *ListSubscriptionsRequest) (r
 func (client *SmnClient) NewListSubscriptionsRequest() (request *ListSubscriptionsRequest) {
 	request = &ListSubscriptionsRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
-		Offset:      "0",
-		Limit:       "100",
+		Offset:      0,
+		Limit:       100,
 	}
 	return
 }

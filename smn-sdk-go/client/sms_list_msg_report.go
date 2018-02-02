@@ -23,9 +23,9 @@ type ListSmsMsgReportRequest struct {
 	EndTime   string `json:"end_time"`
 	SignId    string `json:"sign_id"`
 	Mobile    string `json:"mobile"`
-	Status    string `json:"status"`
-	Limit     string `json:"limit"`
-	Offset    string `json:"offset"`
+	Status    int `json:"status"`
+	Limit     int `json:"limit"`
+	Offset    int `json:"offset"`
 }
 
 // the response data of list sms msg report
@@ -61,8 +61,8 @@ func (client *SmnClient) ListSmsMsgReport(request *ListSmsMsgReportRequest) (res
 func (client *SmnClient) NewListSmsMsgReportRequest() (request *ListSmsMsgReportRequest) {
 	request = &ListSmsMsgReportRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
-		Offset:      "0",
-		Limit:       "100",
+		Offset:      0,
+		Limit:       100,
 	}
 	return
 }

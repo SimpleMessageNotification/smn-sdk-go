@@ -128,6 +128,8 @@ func ListSmsMsgReport(smnClient *client.SmnClient) {
 	request.StartTime = "1512625955366"
 	request.EndTime = "1512712355850"
 	request.SignId = "6be340e91e5241e4b5d85837e6709104"
+	request.Limit = 10
+	request.Offset = 0
 	response, err := smnClient.ListSmsMsgReport(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)

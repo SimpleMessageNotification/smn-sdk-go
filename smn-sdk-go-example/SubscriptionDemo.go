@@ -51,8 +51,8 @@ func main() {
 
 func ListSubscriptions(smnClient *client.SmnClient) {
 	request := smnClient.NewListSubscriptionsRequest()
-	request.Limit = "10"
-	request.Offset = "0"
+	request.Limit = 10
+	request.Offset = 0
 	response, err := smnClient.ListSubscriptions(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)
@@ -69,8 +69,8 @@ func ListSubscriptions(smnClient *client.SmnClient) {
 
 func ListSubscriptionsByTopic(smnClient *client.SmnClient) {
 	request := smnClient.NewListSubscriptionsByTopicRequest()
-	request.Limit = "10"
-	request.Offset = "0"
+	request.Limit = 10
+	request.Offset = 0
 	request.TopicUrn = "urn:smn:cn-north-1:cffe4fc4c9a54219b60dbaf7b586e132:test_zhangyx_go"
 	response, err := smnClient.ListSubscriptionsByTopic(request)
 	if err != nil {

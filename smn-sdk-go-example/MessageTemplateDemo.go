@@ -39,16 +39,16 @@ func main() {
 		panic(err)
 	}
 
-	// create message template
-	CreateMessageTemplate(&tempClient)
-	// query message template detail
-	QueryMessageTemplateDetail(&tempClient)
-	// list message template
+	//// create message template
+	//CreateMessageTemplate(&tempClient)
+	//// query message template detail
+	//QueryMessageTemplateDetail(&tempClient)
+	//// list message template
 	ListMessageTemplate(&tempClient)
-	// update message template
-	UpdateMessageTemplate(&tempClient)
-	// delete message template
-	DeleteMessageTemplate(&tempClient)
+	//// update message template
+	//UpdateMessageTemplate(&tempClient)
+	//// delete message template
+	//DeleteMessageTemplate(&tempClient)
 }
 
 func CreateMessageTemplate(smnClient *client.SmnClient) {
@@ -89,10 +89,12 @@ func QueryMessageTemplateDetail(smnClient *client.SmnClient) {
 
 func ListMessageTemplate(smnClient *client.SmnClient) {
 	request := smnClient.NewListMessageTemplateRequest()
-	request.Offset = "0"
-	request.Limit = "10"
+	request.Offset = 0
+	request.Limit = 10
 	request.MessageTemplateName = "template_test_by_zhangyx_for_go"
 	response, err := smnClient.ListMessageTemplate(request)
+	fmt.Println(request.GetUrl())
+
 	if err != nil {
 		fmt.Println("the request is error ", err)
 		return
