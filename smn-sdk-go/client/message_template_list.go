@@ -22,8 +22,8 @@ type ListMessageTemplateRequest struct {
 	*BaseRequest
 	MessageTemplateName string `json:"message_template_name"`
 	Protocol            string `json:"protocol"`
-	Limit               string `json:"limit"`
-	Offset              string `json:"offset"`
+	Limit               int `json:"limit"`
+	Offset              int `json:"offset"`
 }
 
 //the response data of list message template
@@ -32,6 +32,7 @@ type ListMessageTemplateResponse struct {
 	MessageTemplateCount int                   `json:"message_template_count"`
 	MessageTemplates     []MessageTemplateInfo `json:"message_templates"`
 }
+
 // message template data info
 type MessageTemplateInfo struct {
 	MessageTemplateName string   `json:"message_template_name"`
@@ -55,6 +56,8 @@ func (client *SmnClient) ListMessageTemplate(request *ListMessageTemplateRequest
 func (client *SmnClient) NewListMessageTemplateRequest() (request *ListMessageTemplateRequest) {
 	request = &ListMessageTemplateRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
+		Offset:      0,
+		Limit:       100,
 	}
 	return
 }

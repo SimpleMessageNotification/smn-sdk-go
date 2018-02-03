@@ -19,8 +19,8 @@ import (
 // the request data of list topic
 type ListTopicRequest struct {
 	*BaseRequest
-	Limit  string `json:"limit"`
-	Offset string `json:"offset"`
+	Limit  int `json:"limit"`
+	Offset int `json:"offset"`
 }
 
 // the response data of list topic
@@ -51,8 +51,8 @@ func (client *SmnClient) ListTopic(request *ListTopicRequest) (response *ListTop
 func (client *SmnClient) NewListTopicRequest() (request *ListTopicRequest) {
 	request = &ListTopicRequest{
 		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
-		Offset:      "0",
-		Limit:       "100",
+		Offset:      0,
+		Limit:       100,
 	}
 	return
 }
