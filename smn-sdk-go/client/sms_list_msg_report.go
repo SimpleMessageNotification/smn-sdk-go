@@ -23,7 +23,7 @@ type ListSmsMsgReportRequest struct {
 	EndTime   string `json:"end_time"`
 	SignId    string `json:"sign_id"`
 	Mobile    string `json:"mobile"`
-	Status    int `json:"status"`
+	Status    string `json:"status"`
 	Limit     int `json:"limit"`
 	Offset    int `json:"offset"`
 }
