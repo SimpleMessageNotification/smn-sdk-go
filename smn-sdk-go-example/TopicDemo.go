@@ -3,16 +3,6 @@ package main
 import (
 	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/client"
 	"fmt"
-	//"net/http"
-	//"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
-	//"time"
-	//"net/url"
-	//"crypto/tls"
-	"net/http"
-	"net/url"
-	"crypto/tls"
-	"github.com/SimpleMessageNotification/smn-sdk-go/smn-sdk-go/commom"
-	"time"
 )
 
 func main() {
@@ -123,8 +113,8 @@ func DeleteTopic(smnClient *client.SmnClient) {
 
 func ListTopic(smnClient *client.SmnClient) {
 	request := smnClient.NewListTopicRequest()
-	request.Limit = "10"
-	request.Offset = "0"
+	request.Limit = 10
+	request.Offset = 0
 	response, err := smnClient.ListTopic(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)

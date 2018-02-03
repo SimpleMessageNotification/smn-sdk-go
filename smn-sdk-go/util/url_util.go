@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"io"
 	"strings"
+	"fmt"
 )
 
 // get the request query params
@@ -31,8 +32,9 @@ func GetQueryParams(request interface{}) (urlEncoded string, err error) {
 
 	urlEncoder := url.Values{}
 	for key, value := range result {
-		if value != "" {
-			urlEncoder.Add(key, value.(string))
+		str := fmt.Sprint(value)
+		if str != "" {
+			urlEncoder.Add(key, str)
 		}
 	}
 	urlEncoded = urlEncoder.Encode()
