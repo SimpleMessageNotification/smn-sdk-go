@@ -50,8 +50,18 @@ func main() {
 		panic(err)
 	}
 
-	// send sms
+	// send notify/verify sms
 	SmsPublish(&tempClient)
+	// send promotion sms
+	PromotionSmsPublish(&tempClient)
+	// create sms template
+	CreateSmsTemplate(&tempClient)
+	//delete sms template
+	DeleteSmsTemplate(&tempClient)
+	// list sms template
+	ListSmsTemplate(&tempClient)
+	// query sms template detail
+	GetSmsTemplateDetail(&tempClient)
 	// list sms signs
 	ListSmsSigns(&tempClient)
 	// delete sms sign
@@ -185,6 +195,102 @@ func UpdateSmsEvent(smnClient *client.SmnClient) {
 	request.Callback = append(request.Callback, callback1)
 
 	response, err := smnClient.UpdateSmsEvent(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func PromotionSmsPublish(smnClient *client.SmnClient) {
+	request := smnClient.NewPromotionSmsPublishRequest()
+	request.SignId = "47f86cf7c9a7449d98ee61cf193a1060"
+	request.SmsTemplateId = "bfda25c6406e42ddabad74b4a20f6d05"
+	request.EndPoints = []string{"8613688807587"}
+
+	response, err := smnClient.PromotionSmsPublish(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func CreateSmsTemplate(smnClient *client.SmnClient) {
+	request := smnClient.NewCreateSmsTemplateRequest()
+	request.SmsTemplateType = 1
+	request.SmsTemplateName = "go语言测试"
+	request.SmsTemplateContent = "go语言测试12341234"
+	request.Remark = "helloword"
+	response, err := smnClient.CreateSmsTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func GetSmsTemplateDetail(smnClient *client.SmnClient) {
+	request := smnClient.NewGetSmsTemplateDetailRequest()
+	request.SmsTemplateId = "bfda25c6406e42ddabad74b4a20f6d05"
+
+	response, err := smnClient.GetSmsTemplateDetailRequest(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func DeleteSmsTemplate(smnClient *client.SmnClient) {
+	request := smnClient.NewDeleteSmsTemplateRequest()
+	request.SmsTemplateId = "5341edf7f0aa410684737511b26d72b9"
+
+	response, err := smnClient.DeleteSmsTemplate(request)
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+func ListSmsTemplate(smnClient *client.SmnClient) {
+	request := smnClient.NewListSmsTemplatesRequest()
+	request.Offset = "0"
+	request.Limit = "10"
+	request.SmsTemplateType = 1
+	request.SmsTemplateName = "模板"
+	response, err := smnClient.ListSmsTemplates(request)
 	if err != nil {
 		fmt.Println("the request is error ", err)
 		return
