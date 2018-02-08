@@ -12,7 +12,7 @@
 package util
 
 const (
-	Version         = "1.0.0"
+	Version         = "1.0.1"
 	Smn             = "smn"
 	Iam             = "iam"
 	Endpoint        = "myhuaweicloud.com"
@@ -21,6 +21,8 @@ const (
 	V2Version       = "v2"
 	Notifications   = "notifications"
 	SmnProtocolSms  = "sms"
+	SmnPromotionSms = "promotion"
+	SmnSmsTemplate  = "sms_template"
 	SmsSignature    = "sms_sign"
 	Report          = "report"
 	Message         = "message"
