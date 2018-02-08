@@ -19,7 +19,7 @@ import (
 //the request data of list sms template
 type ListSmsTemplatesRequest struct {
 	*BaseRequest
-	SmsTemplateName string `json:"message_template_name"`
+	SmsTemplateName string `json:"sms_template_name"`
 	SmsTemplateType int `json:"sms_template_type"`
 	Limit           string `json:"limit"`
 	Offset          string `json:"offset"`
