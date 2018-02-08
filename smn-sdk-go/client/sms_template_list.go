@@ -23,6 +23,7 @@ type ListSmsTemplatesRequest struct {
 	SmsTemplateType int `json:"sms_template_type"`
 	Limit           string `json:"limit"`
 	Offset          string `json:"offset"`
+	Status			string `json:"status"`
 }
 
 //the response data of list sms template
