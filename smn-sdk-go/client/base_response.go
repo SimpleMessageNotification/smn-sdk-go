@@ -35,6 +35,7 @@ type ErrorResponse struct {
 type SmnResponse interface {
 	parseHttpResponse(httpResponse *http.Response) error
 	GetContentBytes() []byte
+	IsNoPermission() bool
 }
 
 func (response *BaseResponse) parseHttpResponse(httpResponse *http.Response) (err error) {
@@ -66,6 +67,14 @@ func (response *BaseResponse) GetHttpStatus() int {
 
 func (response *BaseResponse) IsSuccess() bool {
 	if response.GetHttpStatus() >= 200 && response.GetHttpStatus() < 300 {
+		return true
+	}
+
+	return false
+}
+
+func (response *BaseResponse) IsNoPermission() bool {
+	if response != nil && (response.GetHttpStatus() == 403 || response.GetHttpStatus() == 401) {
 		return true
 	}
 

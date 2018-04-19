@@ -69,6 +69,13 @@ func (auth *Auth) GetTokenAndProject() (token, projectId string, err error) {
 	return
 }
 
+// clean token cache
+func (auth *Auth) CleanToken() {
+	if auth != nil {
+		auth.authToken = ""
+	}
+}
+
 func (auth *Auth) isExpired() bool {
 	return auth.expiresTime < time.Now().UTC().Unix()
 }

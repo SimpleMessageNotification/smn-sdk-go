@@ -50,30 +50,34 @@ func main() {
 		panic(err)
 	}
 
-	// send notify/verify sms
-	SmsPublish(&tempClient)
-	// send promotion sms
-	PromotionSmsPublish(&tempClient)
-	// create sms template
-	CreateSmsTemplate(&tempClient)
-	//delete sms template
-	DeleteSmsTemplate(&tempClient)
-	// list sms template
-	ListSmsTemplate(&tempClient)
-	// query sms template detail
-	GetSmsTemplateDetail(&tempClient)
-	// list sms signs
-	ListSmsSigns(&tempClient)
-	// delete sms sign
-	DeleteSmsSign(&tempClient)
-	// list sms msg report
-	ListSmsMsgReport(&tempClient)
-	// get sms message content
-	GetSmsMessage(&tempClient)
-	// list sms callback event
-	ListSmsEvent(&tempClient)
-	// update sms callback event
-	UpdateSmsEvent(&tempClient)
+	//// send notify/verify sms
+	//SmsPublish(&tempClient)
+	// batch send notify/verify sms
+	SmsBatchPublish(&tempClient)
+	// batch send notify/verify sms with diff message
+	SmsBatchPublishWithDiffMessage(&tempClient)
+	//// send promotion sms
+	//PromotionSmsPublish(&tempClient)
+	//// create sms template
+	//CreateSmsTemplate(&tempClient)
+	////delete sms template
+	//DeleteSmsTemplate(&tempClient)
+	//// list sms template
+	//ListSmsTemplate(&tempClient)
+	//// query sms template detail
+	//GetSmsTemplateDetail(&tempClient)
+	//// list sms signs
+	//ListSmsSigns(&tempClient)
+	//// delete sms sign
+	//DeleteSmsSign(&tempClient)
+	//// list sms msg report
+	//ListSmsMsgReport(&tempClient)
+	//// get sms message content
+	//GetSmsMessage(&tempClient)
+	//// list sms callback event
+	//ListSmsEvent(&tempClient)
+	//// update sms callback event
+	//UpdateSmsEvent(&tempClient)
 }
 
 // send sms
@@ -83,6 +87,48 @@ func SmsPublish(smnClient *client.SmnClient) {
 	request.SignId = "6be340e91e5241e4b5d85837e6709104"
 	request.Message = "您的验证码是:1234，请查收"
 	response, err := smnClient.SmsPublish(request)
+
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+// batch send notify/verify sms
+func SmsBatchPublish(smnClient *client.SmnClient) {
+	request := smnClient.NewSmsBatchPublishRequest()
+	request.EndPoints = []string{"8613688807587"}
+	request.SignId = "6be340e91e5241e4b5d85837e6709104"
+	request.Message = "您的验证码是:123455，请查收"
+	response, err := smnClient.SmsBatchPublish(request)
+
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+// batch send notify/verify sms with diff message
+func SmsBatchPublishWithDiffMessage(smnClient *client.SmnClient) {
+	request := smnClient.NewSmsBatchPublishWithDiffMessageRequest()
+	smsMessage1 := client.SmsPublishMessage{Message: "验证码12355测试", EndPoint: "13688807587", SignId: "6be340e91e5241e4b5d85837e6709104"}
+	smsMessage2 := client.SmsPublishMessage{Message: "验证码12355测试", EndPoint: "17727904831", SignId: "6be340e91e5241e4b5d85837e6709104"}
+	request.SmsMessage = append(request.SmsMessage, smsMessage1, smsMessage2)
+	response, err := smnClient.SmsBatchPublishWithDiffMessage(request)
 
 	if err != nil {
 		fmt.Println("the request is error ", err)
