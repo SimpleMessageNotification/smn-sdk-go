@@ -22,7 +22,7 @@ type SmsBatchPublishRequest struct {
 	*BaseRequest
 	Message                string   `json:"message""`
 	EndPoints              []string `json:"endpoints"`
-	SignId                 string   `json:"sign_id"`
+	SignId                 string   `json:"sign_id,omitempty"`
 	MessageIncludeSignFlag bool     `json:"message_include_sign_flag"`
 }
 

@@ -22,7 +22,7 @@ type SmsPublishRequest struct {
 	*BaseRequest
 	Message                string `json:"message""`
 	EndPoint               string `json:"endpoint"`
-	SignId                 string `json:"sign_id"`
+	SignId                 string `json:"sign_id,omitempty"`
 	MessageIncludeSignFlag bool   `json:"message_include_sign_flag"`
 }
 
