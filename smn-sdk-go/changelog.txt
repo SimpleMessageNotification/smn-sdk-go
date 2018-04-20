@@ -4,3 +4,8 @@
 2018-02-02 version 1.0.1:
 1.Add sms template
 2.Optimize code
+
+2018-04-20 version 1.0.2:
+1.Fix token cache
+2.Add batch send notify/verify sms
+3.Add MessageIncludeSignFlag field

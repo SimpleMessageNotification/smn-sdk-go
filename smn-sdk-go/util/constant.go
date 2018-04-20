@@ -12,7 +12,7 @@
 package util
 
 const (
-	Version             = "1.0.1"
+	Version             = "1.0.2"
 	Smn                 = "smn"
 	Iam                 = "iam"
 	Endpoint            = "myhuaweicloud.com"
