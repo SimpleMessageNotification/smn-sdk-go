@@ -77,7 +77,7 @@ func main() {
 	// list sms callback event
 	ListSmsEvent(&tempClient)
 	// update sms callback event
-	//UpdateSmsEvent(&tempClient)
+	UpdateSmsEvent(&tempClient)
 }
 
 // send sms
