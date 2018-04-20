@@ -88,6 +88,12 @@ func (client *SmnClient) SendRequest(request SmnRequest, response SmnResponse) (
 	return
 }
 
+func (client *SmnClient) CleanToken() {
+	if client != nil {
+		client.auth.CleanToken()
+	}
+}
+
 func unmarshal(response SmnResponse, httpResponse *http.Response) (err error) {
 	err = response.parseHttpResponse(httpResponse)
 	if err != nil {
