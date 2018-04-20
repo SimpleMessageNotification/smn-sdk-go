@@ -20,9 +20,10 @@ import (
 // the request data of publish sms
 type SmsPublishRequest struct {
 	*BaseRequest
-	Message  string `json:"message""`
-	EndPoint string `json:"endpoint"`
-	SignId   string `json:"sign_id"`
+	Message                string `json:"message""`
+	EndPoint               string `json:"endpoint"`
+	SignId                 string `json:"sign_id,omitempty"`
+	MessageIncludeSignFlag bool   `json:"message_include_sign_flag"`
 }
 
 // the response data of publish sms
@@ -43,7 +44,8 @@ func (client *SmnClient) SmsPublish(request *SmsPublishRequest) (response *SmsPu
 // create a new list sms publish request struct
 func (client *SmnClient) NewSmsPublishRequest() (request *SmsPublishRequest) {
 	request = &SmsPublishRequest{
-		BaseRequest: &BaseRequest{Headers: make(map[string]string)},
+		BaseRequest:            &BaseRequest{Headers: make(map[string]string)},
+		MessageIncludeSignFlag: false,
 	}
 	return
 }
@@ -54,12 +56,12 @@ func (request *SmsPublishRequest) GetUrl() (string, error) {
 		return "", fmt.Errorf("message is null")
 	}
 
-	if request.SignId == "" {
-		return "", fmt.Errorf("signId is null")
-	}
-
 	if request.EndPoint == "" {
 		return "", fmt.Errorf("endpoint is invalid")
+	}
+
+	if !request.MessageIncludeSignFlag && request.SignId == "" {
+		return "", fmt.Errorf("signId is null")
 	}
 
 	return request.BaseRequest.GetSmnServiceUrl() + util.V2Version + util.UrlDelimiter + request.projectId +

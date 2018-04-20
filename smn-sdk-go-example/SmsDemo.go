@@ -52,6 +52,10 @@ func main() {
 
 	// send notify/verify sms
 	SmsPublish(&tempClient)
+	// batch send notify/verify sms
+	SmsBatchPublish(&tempClient)
+	 // batch send notify/verify sms with diff message
+	SmsBatchPublishWithDiffMessage(&tempClient)
 	// send promotion sms
 	PromotionSmsPublish(&tempClient)
 	// create sms template
@@ -80,9 +84,59 @@ func main() {
 func SmsPublish(smnClient *client.SmnClient) {
 	request := smnClient.NewSmsPublishRequest()
 	request.EndPoint = "+8613688807587"
-	request.SignId = "6be340e91e5241e4b5d85837e6709104"
 	request.Message = "您的验证码是:1234，请查收"
+	request.SignId = "6be340e91e5241e4b5d85837e6709104"
+	// 如果该字段为true，内容开头或结尾必须包含有效签名，以【】包起来，如【华为企业云】您的验证码是:1234，请查收
+	// 该字段为true时，request.SignId不要设值
+	request.MessageIncludeSignFlag = false
 	response, err := smnClient.SmsPublish(request)
+
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+// batch send notify/verify sms
+func SmsBatchPublish(smnClient *client.SmnClient) {
+	request := smnClient.NewSmsBatchPublishRequest()
+	request.EndPoints = []string{"8613688807587"}
+	request.Message = "您的验证码是:123455，请查收"
+	// 如果该字段为true，内容开头或结尾必须包含有效签名，以【】包起来，如【华为企业云】您的验证码是:1234，请查收
+	// 该字段为true时，request.SignId不要设值
+	request.MessageIncludeSignFlag = true
+	request.SignId = "6be340e91e5241e4b5d85837e6709104"
+	response, err := smnClient.SmsBatchPublish(request)
+
+	if err != nil {
+		fmt.Println("the request is error ", err)
+		return
+	}
+
+	if !response.IsSuccess() {
+		fmt.Printf("%#v\n", response.ErrorResponse)
+		return
+	}
+
+	fmt.Printf("%#v\n", response)
+}
+
+// batch send notify/verify sms with diff message
+func SmsBatchPublishWithDiffMessage(smnClient *client.SmnClient) {
+	request := smnClient.NewSmsBatchPublishWithDiffMessageRequest()
+	smsMessage1 := client.SmsPublishMessage{Message: "验证码12355测试", EndPoint: "13688807587", SignId: "6be340e91e5241e4b5d85837e6709104"}
+	// 如果该字段为true，内容开头或结尾必须包含有效签名，以【】包起来，如【华为企业云】您的验证码是:1234，请查收
+	// 该字段为true时，request.SignId不要设值
+	smsMessage2 := client.SmsPublishMessage{Message: "【华为企业云】验证码12355测试", EndPoint: "17*******31", MessageIncludeSignFlag: true}
+	request.SmsMessage = append(request.SmsMessage, smsMessage1, smsMessage2)
+	response, err := smnClient.SmsBatchPublishWithDiffMessage(request)
 
 	if err != nil {
 		fmt.Println("the request is error ", err)

@@ -67,6 +67,7 @@ func (client *SmnClient) SendRequest(request SmnRequest, response SmnResponse) (
 	if err != nil {
 		return
 	}
+
 	httpRequest, err := http.NewRequest(requestMethod, requestUrl, body)
 	if err != nil {
 		return
@@ -79,7 +80,18 @@ func (client *SmnClient) SendRequest(request SmnRequest, response SmnResponse) (
 		return
 	}
 	err = unmarshal(response, httpResponse)
+
+	// no permission clean token
+	if err == nil && response.IsNoPermission() {
+		client.auth.CleanToken()
+	}
 	return
+}
+
+func (client *SmnClient) CleanToken() {
+	if client != nil {
+		client.auth.CleanToken()
+	}
 }
 
 func unmarshal(response SmnResponse, httpResponse *http.Response) (err error) {

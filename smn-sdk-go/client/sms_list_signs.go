@@ -34,6 +34,7 @@ type SmsSignInfo struct {
 	SignId     string `json:"sign_id"`
 	Reply      string `json:"reply"`
 	Status     int    `json:"status"`
+	SignType   int    `json:"sign_type"`
 }
 
 // send request to list sms signs
